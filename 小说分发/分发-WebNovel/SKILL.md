@@ -338,7 +338,105 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于 `WebNovel/` 目录�
 - `SUBMIT` 后再点 `SAVE`，能更稳妥地保证“作者有话说”和正文同时落盘。
 - `SAVE` 后最终章节 URL 会变成 `https://inkstone.webnovel.com/novels/chapter/edit/{书籍ID}/{章节ID}`；该 URL 是提取章节Id 的优先来源。
 - 每章结束以“保存成功 + URL 已确认含章节Id + 已回写记录”为完整完成信号；缺任一项都不算真正闭环。
+### 批量上传经验（2026-05-24 40章实战验证）
 
+> 以下经验基于第1卷第1-40章一次性上传 WebNovel 的实战总结，所有结论均已验证。
+
+#### 1) 正文编辑器变更检测是最大陷阱
+
+WebNovel 的 iframe 富文本编辑器**不会自动检测 DOM 变更**。仅用 `frame.evaluate()` 将 innerHTML 设置为正文后，SAVE 按钮虽然可点击，但**保存不会成功**（URL 不跳转到编辑页，仍停留在 create 页，也无报错提示）。
+
+**正确的注入与触发流程：**
+
+```
+1. frame.locator('body').click()        // 聚焦编辑器
+2. frame.evaluate(() => {               // 注入正文
+     document.body.innerHTML = '';
+     text.split('\n\n').forEach(p => {
+       const el = document.createElement('p');
+       el.textContent = p.trim();
+       document.body.appendChild(el);
+     });
+   }, bodyText)
+3. body.press('End')                    // 触发编辑器 input 事件
+4. 等待 100ms
+5. body.press('Space')                  // 制造一次真实键盘输入
+6. 等待 100ms
+7. body.press('Backspace')              // 撤销，但变更检测已完成
+8. 等待 300ms                           // 等编辑器状态刷新
+9. 点击 SAVE                            // 此时保存才能成功
+```
+
+**教训**：不要假设"内容可见 = 编辑器已识别"。任何直接操作 DOM 的注入方式，末尾必须跟一次真实键盘事件（End → 打印字符 → 删除）来激活编辑器的变更追踪。
+
+#### 2) 草稿恢复弹窗
+
+保存一章后立刻进入下一章的 create 页面，可能弹出：
+
+> "There is an unsaved draft from a previous creation. Would you like to use it?"
+
+- **必须点 "Cancel"**（不是 USE），确保从空白页开始。
+- 若点 "USE"，会加载上一章的残留内容，导致标题/正文混串。
+- 用 `page.locator('div[class*="modal"] button:has-text("Cancel")')` 定位。
+- 等待 300ms 让弹窗关闭动画完成。
+
+#### 3) 作者有话说的 "got it!" 教学浮层
+
+首次点击 "ADD AUTHOR'S THOUGHT" 时，会在对话框**前面**弹出一个教学提示浮层，内含 "got it!" 按钮。必须点击 "got it!" 关闭浮层后，才能操作对话框内的 textarea。
+
+- 定位器：`page.locator('button:has-text("got it!")')`
+- 仅在 `isVisible()` 时才点击，后续章节可能不再出现。
+- 若跳过此步骤，textarea 被浮层遮挡，fill() 会超时或写入错误元素。
+
+#### 4) 标题输入框的清空方式
+
+不能只用 `fill(text)`，因为旧值可能残留。必须三步：
+
+```
+titleInput.click()
+titleInput.fill('')     // 先清空
+titleInput.fill(text)   // 再填入
+```
+
+#### 5) 内容服务器 + 小批次预取策略（推荐）
+
+对 10 章以上批量场景：
+
+1. **预处理**：用脚本将所有章节提取到 `.cache/content_parts/no_part/v{卷号}/` 目录（格式：`{两位章号}_title.txt`、`{两位章号}_body.txt`、`{两位章号}_author.txt`）。
+2. **启动服务器**：`$env:CONTENT_PARTS_PORT='8765'; $env:DISTRIBUTION_PLATFORM_DIR='WebNovel'; node scripts/content_parts_server.mjs`
+3. **预取到内存**：每小批次开始前，先 navigate 到 `http://127.0.0.1:8765/parts/v/1/{章号}` 获取 JSON，存入内存对象。
+4. **再开始上传循环**：从内存取数据，不用每章重新读文件。
+5. **注意 CORS**：HTTPS 页面不能直接 fetch HTTP。Playwright 代码中必须先用 `page.goto('http://127.0.0.1:8765/...')` 获取数据，再 navigate 回 inkstone。
+
+#### 6) 各步骤等待时间的经验值
+
+| 步骤 | 建议等待 | 说明 |
+|:---|:---|:---|
+| 页面跳转后 | 1500ms | 等 iframe 编辑器和 JS 初始化完成 |
+| 正文注入后 + 触发变更 | 300ms | 等编辑器消化 input 事件 |
+| ADD AUTHOR'S THOUGHT 点击后 | 1000-1500ms | 等对话框 + 浮层完整加载 |
+| SUBMIT 后 | 500-800ms | 等对话框关闭、内容落位 |
+| SAVE 后 | 2500-3000ms | 等服务器保存 + URL 跳转 |
+| Cancel 草稿弹窗后 | 300ms | 等弹窗消失 |
+
+#### 7) 失败的常见信号
+
+| 症状 | 根因 | 修复 |
+|:---|:---|:---|
+| SAVE 后 URL 仍为 `/chapter/create/...` | 编辑器未检测到内容变更 | 在注入正文后加 End→Space→Backspace |
+| 标题未更新 | 直接用 `fill()` 未先清空 | 先 `fill('')` 再 `fill(text)` |
+| 作者有话说未保存 | 未点 SUBMIT 或浮层遮挡 | 先消 "got it!" 浮层，再填 textarea + SUBMIT |
+| 章节内容串到上一章 | 草稿弹窗点了 USE | 点 Cancel 清空后重新填写 |
+| `章节Id` 缺失但保存成功 | URL 未跳转或跳转延迟 | 等待更长时间（3000ms+），或用 page.url() 确认 |
+
+#### 8) 对账机制
+
+每个小批次（5-10章）结束后必须对账：
+
+- `计划章数 = 成功章数 + 失败章数`
+- 所有成功章必须都有 `章节Id`（从 URL 中提取）
+- 所有成功章必须已写入 `分发记录.md`
+- 缺任一项 → 暂停下一批次，先补漏
 ## 最小可执行检查表（10秒版）
 
 > 用法：每次分发前按顺序快速过一遍；有任意一项不满足，就先修正再上传。

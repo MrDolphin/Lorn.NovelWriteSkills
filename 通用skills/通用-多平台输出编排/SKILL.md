@@ -1,7 +1,7 @@
 ---
 name: 通用-多平台输出编排
 description: '用于对单章或多章执行多平台输出全流程编排。适合多平台输出 SOP、批量平台分发、断点恢复、门禁回炉与最终摘要收口。关键词：多平台输出编排、平台分发、断点恢复、门禁回炉、平台日志、最终摘要、今日头条。'
-argument-hint: '请给我一个 chapterPath 或 chapterPaths；platforms 可以省略。若未指定 platforms，我会使用当前支持的所有输出平台；若已指定 platforms，我只使用用户给定的平台集合。'
+argument-hint: '请给我一个 chapterPath 或 chapterPaths；platforms 可以省略。若用户命令中已指定 platforms，按指定子集执行；若未指定，必须读取项目根目录 `平台POV基线表` 获取默认输出平台列表；若该文件不存在，提示用户创建后停止。'
 ---
 
 # 通用-多平台输出编排
@@ -111,7 +111,11 @@ argument-hint: '请给我一个 chapterPath 或 chapterPaths；platforms 可以�
 
 ### 阶段 B：平台范围与任务队列（4–6）
 
-4. 平台参数可选：若用户指定 `platforms`，按指定子集执行；若未指定，默认输出“当前仓库已注册的全部输出平台”（当前是 14 个，后续新增平台时必须自动纳入，不得写死 14）。
+4. 平台参数解析（三步优先级）：<br>
+	① 若用户命令中已指定 `platforms`，按指定子集执行；<br>
+	② 若用户未指定 `platforms`，必须读取项目根目录 `平台POV基线表`，以其中列出的平台作为本次默认输出平台集合；<br>
+	③ 若项目根目录不存在 `平台POV基线表`，必须提示用户创建该文件并写入目标平台列表，然后**立即停止**，不得继续执行任何后续步骤。<br>
+	`平台POV基线表` 格式要求：每行一个平台名（与 `通用-输出*版` Skill 名称后缀一致），`#` 开头的行为注释。
 5. 必须读取并建立每个源章节文件的正文上下文，形成可追溯的章节任务队列。
 6. 对每个章节，必须先完成 POV 建档，不得跳过。
 	- 先判定源稿 POV 形态：单视角稳定章 / 视角切换章 / 多视角连续章。
@@ -145,7 +149,7 @@ argument-hint: '请给我一个 chapterPath 或 chapterPaths；platforms 可以�
 1. 先判断源稿是否需要前置提纯；若有单平台腔、事件链松动或钩子失温，先调用：`通用-提纯多平台母稿`
 2. 再做平台差异推演：`通用-多平台小说适配`
 3. 再按平台子集路由到对应输出 Skill
-4. 每个平台写入后先显式运行字数门禁：正文与 `## 作者有话说` 必须同时达标；中文平台 gate 至少包含 `minCJK=3500, maxCJK=6500, requireAfterword=true, minAfterwordCJK=200, maxAfterwordCJK=300`，英文平台 gate 至少包含 `minLen=6500, requireAfterword=true, minAfterwordWords=100, maxAfterwordWords=150`。若只补测作者有话说，中文用 `scripts/count-afterword.ps1 -MinCJK 200 -MaxCJK 300`，英文用 `scripts/count-afterword-words.ps1 -MinWords 100 -MaxWords 150`。任何平台若正文未达门槛，不得进入后续 POV / 相似度门禁。
+4. 每个平台写入后先显式运行字数门禁：正文与 `## 作者有话说` 必须同时达标；中文平台 gate 至少包含 `minCJK=3500, maxCJK=6500, requireAfterword=true, minAfterwordCJK=200, maxAfterwordCJK=300`，英文平台 gate 至少包含 `minWords=2500, requireAfterword=true, minAfterwordWords=100, maxAfterwordWords=150`。若只补测作者有话说，中文用 `scripts/count-afterword.ps1 -MinCJK 200 -MaxCJK 300`，英文用 `scripts/count-afterword-words.ps1 -MinWords 100 -MaxWords 150`。任何平台若正文未达门槛，不得进入后续 POV / 相似度门禁。
 5. 在字数达标的前提下，再按已锁定的 `platformPovContract` 运行 POV 门禁：可直接调用 `scripts/pov_validate.py`，或为同一平台当前章节列表生成配置后调用 `scripts/run_pov_gate.ps1`；第三人称链路默认检查正文区块是否出现对话外第一 / 第二人称，第一人称链路默认检查正文区块是否存在对话外第一人称锚点；若本章属于视角切换章 / 多视角连续章，则脚本结果只作辅证，仍必须人工复核其是否与已登记 `switchPlan` 一致
 6. 最后执行分语言终检、日志收口与摘要输出
 
@@ -232,7 +236,7 @@ argument-hint: '请给我一个 chapterPath 或 chapterPaths；platforms 可以�
 - 任一平台分支不得只凭“看起来够长”或“作者有话说应该差不多”放行；正文与作者有话说字数必须通过脚本实测并写入日志字段。
 - 命中本 Skill 时，`通用-提纯多平台母稿` 与 `通用-多平台小说适配` 都是必经节点；不得跳过。
 - 章节定位必须兼容“路径输入”和“部/卷/章输入”两种模式；部/卷/章输入默认定位到 `小说正文/`。
-- 默认平台集合必须按“当前可用输出平台清单”动态解析，不得把 14 个平台写死在执行器里。
+- 默认平台集合必须从项目根目录 `平台POV基线表` 动态读取，不得把固定平台列表写死在执行器里；若该文件不存在，必须提示用户创建后停止，不得继续执行。
 - 反注水与无意义字符检查属于硬门禁；任一异常必须回炉，不得以“相似度已过线”为由放行。
 - 流程停止条件必须满足：全部指定平台落盘 + 全部门禁通过 + 可续跑日志完整。
 - 调用完整性属于硬门禁：`requiredCalledSkills` 与 `calledSkills` 必须对齐，且 `missingCalledSkills` 为空。

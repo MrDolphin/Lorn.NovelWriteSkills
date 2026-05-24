@@ -197,16 +197,19 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于 `My Fiction/` 目录
 
 1. 在正文编辑区域输入该章节正文。
 2. 必须确保正文来自你指定的章节文件，不得错章串章。
-3. 若编辑器为富文本或类富文本区域，输入后需确认可见正文确实已落入编辑区，而不是只进入了错误焦点元素。
+3. **编辑器为 Draft.js 富文本编辑器**（类选择器 `.public-DraftEditor-content`），以下方法按可靠性排序：
+   - **首选**：`page.keyboard.insertText(bodyText)` — 逐字符模拟输入，Draft.js 能正确捕获并更新内部状态与字数统计。代价是耗时较长（约 15 秒 / 10K 字符）。
+   - **次选**：`document.execCommand('insertText', false, text)` — 一次性注入纯文本，Draft.js 可识别但极端大文本可能引发 React 内部状态错误。
+   - **禁用**：直接操作 `el.innerHTML` 或 `el.textContent` — Draft.js 依赖内部 ContentState，绕过 React 的 DOM 操作不会触发字数统计更新，且可能引发"Application error"客户端异常。
 
 ### 步骤 7：添加作者有话说
 
-1. 点击章节编辑区下方的“ADD AUTHOR'S Note”。
-2. 等待弹出的对话框出现输入框。
-3. 在对话框输入框中**先全选清空旧内容**，再输入该章“作者有话说”内容，避免与旧文本拼接。
-4. 若页面存在字数限制提示，必须在限制内保存原意，不得超限硬提。
-5. 输入完成后，点击“SUBMIT”。
-6. 若页面支持收起或关闭该对话框，则确认内容已写入后再收起，避免输入丢失。
+1. 点击章节编辑区下方的 "+ Add Author's Note"。
+2. **注意：该操作并非弹出独立对话框**，而是在正文编辑器下方展开一个内联输入框（`placeholder="Enter author's note here."`）。
+3. 在内联输入框中录入该章"作者有话说"内容。
+4. **无需点击 SUBMIT**：作者有话说内容与正文在同一页面，最终由 "SAVE" 一并提交。
+5. 若页面存在字数限制提示，必须在限制内保存原意，不得超限硬提。
+6. 输入完成后确认内容可见，避免输入丢失。
 
 ### 步骤 8：保存并获取章节Id
 
@@ -267,10 +270,11 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于 `My Fiction/` 目录
 
 #### C. 用“小批次提交”替代“整批一次性提交”
 
-- 推荐按 `5–10` 章为一个小批次执行：
+- 推荐按 **5 章** 为一个小批次执行（已验证为最优节奏：5 章约需 3 分钟，不会触发限流且便于在失败时快速重试）：
    - 每个小批次完成后立刻回写 `分发记录.md`；
    - 再进入下一个小批次。
-- 这样即使遇到限流、登录态波动或页面改版，也只影响当前小批次，不会让整批进度回滚。
+- 每批结束后做对账复核：`计划 = 成功 + 失败`，且成功章均完成 `章节Id` 回写。
+- 这样即使遇到 VS 崩溃、登录态波动或网络中断，也只影响当前小批次，不会让整批进度回滚。
 
 > D / E / F 三节统一执行口径：优先保证批次连续性与可回滚性；安全验证类提示一律按阻断处理；数据通道异常必须可降级。
 
@@ -331,12 +335,54 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于 `My Fiction/` 目录
 
 ## 实操经验沉淀（基于已知页面信息与分发逻辑）
 
-- `write.myfiction.com` 的登录步骤必须留给用户手动完成；这是硬边界，不要替用户“代劳”到过线。
-- 该平台不分卷，因此不要把“卷号”写进标题或章节唯一键里。
-- `ADD AUTHOR'S Note` 不是直接文本框，而是先弹出对话框，再在对话框里输入内容。
-- `SUBMIT` 后再点 `SAVE`，能更稳妥地保证“作者有话说”和正文同时落盘。
+### 编辑器与内容注入
+
+- **Draft.js 编辑器**：My Fiction 正文编辑器基于 Draft.js（React 富文本框架），类选择器为 `.public-DraftEditor-content`。Draft.js 依赖内部 ContentState，任何绕过 React 的 DOM 操作（如直接设置 `innerHTML`）都不会触发字数统计更新，且可能引发 "Application error" 客户端异常。
+- **首选注入方法**：`page.keyboard.insertText(bodyText)` 逐字符模拟键入，Draft.js 可完整捕获并更新内部状态与 Word count。实测 10K 字符约需 15 秒，必须预留足够等待时间（`waitForTimeout(15000)`）。
+- **次选方法**：`document.execCommand('insertText', false, text)` 一次性注入纯文本，Draft.js 可识别但超长文本（>15K 字符）可能触发 React 内部状态偏移错误。
+- **作者有话说注入**：同样使用 `keyboard.insertText()`，注入后无需点击额外按钮，直接 SAVE 即可。
+
+### 剪贴板可靠性
+
+- PowerShell `Set-Clipboard` 对大文本（>10K 字符）不稳定，`Get-Clipboard` 可能返回长度为 0。
+- `clip.exe` 在非交互式终端中可能因权限问题失败（"拒绝访问"）。
+- **结论**：批量上传场景下，优先使用 `keyboard.insertText()` 或 `execCommand`，避免依赖系统剪贴板作为数据传输通道。
+
+### 数据预处理与注入
+
+- 使用 `page.addScriptTag({ path: dataFile })` 将章节数据（标题、正文、作者有话说）注入到 `window.__chapter*` 全局变量。
+- 再用 `page.evaluate(() => window.__chapterBody)` 读取数据后传给编辑器。
+- 该方案避免了将完整文本硬编码在 Playwright 代码中，也避免了 Playwright 字符串转义问题。
+- 预处理时使用 PowerShell `ConvertTo-Json` 将正文序列化为 JSON 字符串（自动处理换行、引号、Unicode 转义），写入 `.js` 文件。
+
+### 浏览器导航与弹窗处理
+
+- `write.myfiction.com` 的登录步骤必须留给用户手动完成；这是硬边界，不要替用户"代劳"到过线。
+- **`beforeunload` 弹窗**：每次从章节编辑页（`/chapter/edit` 或 `/chapter/new`）离开时，页面会弹出 `beforeunload` 确认框。必须尽早设置 `page.on('dialog', async dialog => { await dialog.accept(); })`，否则每次导航都会被中断。
 - `SAVE` 后最终章节 URL 会变成 `https://write.myfiction.com/my-stories/chapter/edit?book_id={书籍ID}&real_chapter_id={章节ID}`；该 URL 是提取章节Id 的优先来源。
-- 每章结束以“保存成功 + URL 已确认含章节Id + 已回写记录”为完整完成信号；缺任一项都不算真正闭环。
+
+### 章节ID恢复（备用方案）
+
+- 若批量执行中断导致某几章的 ID 未能实时提取，可以通过 `My Stories → Story Manage → Drafts` 列表页逐章点击 Edit 获取。
+- Drafts 列表按更新时间倒序排列，每行包含 Edit 按钮，点击后会跳转到编辑页，URL 中包含 `real_chapter_id`。
+- 该方案适用于：VS 崩溃后未回写记录的章节、网络中断导致的 ID 丢失等场景。
+
+### 网络韧性
+
+- 浏览器标签页可能出现 `ERR_NETWORK_IO_SUSPENDED` 状态，表现为所有网络请求挂起且页面无法加载。
+- 此时需要用户手动刷新或重新打开标签页，且通常需要重新登录。Session 非持久化。
+- VS Code 崩溃后，会话中的浏览器页面 ID 和 Playwright 上下文会丢失，需要 `open_browser_page({ forceNew: true })` 重新建立连接。
+
+### 该平台不分卷
+
+- 因此不要把"卷号"写进标题或章节唯一键里。
+- 每章结束以"保存成功 + URL 已确认含章节Id + 已回写记录"为完整完成信号；缺任一项都不算真正闭环。
+
+### 批量执行效率
+
+- **推荐批次大小**：5 章一批。40 章分 8 批约需 16–20 分钟。
+- **单章耗时**：~30–40 秒（导航 2s + 标题 1s + 正文插入 15s + 作者有话说 3s + SAVE 6s + 提取 ID）。
+- **批次间隔**：每批结束后立即回写 `分发记录.md`，避免进度丢失。
 
 ## 最小可执行检查表（10秒版）
 
@@ -353,7 +399,7 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于 `My Fiction/` 目录
 3. **关键输入是否到位**
    - 标题框是完整格式：`Chapter {绝对章号} {章节标题}`（Chapter + 阿拉伯数字 + 一个空格）。
    - 正文已确认写入编辑器可见区（不是误填到别处）。
-   - “作者有话说”已通过 “ADD AUTHOR'S Note” 打开对话框、已填、已点“SUBMIT”。
+   - "作者有话说"已通过 "+ Add Author's Note" 展开内联输入框并填写（无需 SUBMIT，SAVE 一并提交）。
 
 4. **保存与回写是否闭环**
    - 已点击“SAVE”并确认成功。

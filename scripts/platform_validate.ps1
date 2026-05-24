@@ -139,9 +139,13 @@ function Test-Gate {
   if ($Gate['minCJK'] -and ($M.cjk -lt $Gate['minCJK'])) { return $false }
   if ($Gate['maxCJK'] -and ($M.cjk -gt $Gate['maxCJK'])) { return $false }
   if ($Gate['maxLen'] -and ($M.len -gt $Gate['maxLen'])) { return $false }
+  if ($Gate['minWords'] -and ($M.words -lt $Gate['minWords'])) { return $false }
+  if ($Gate['maxWords'] -and ($M.words -gt $Gate['maxWords'])) { return $false }
 
   if ($null -ne $Gate['minTotalCJK'] -and ($M.totalCJK -lt $Gate['minTotalCJK'])) { return $false }
   if ($null -ne $Gate['maxTotalCJK'] -and ($M.totalCJK -gt $Gate['maxTotalCJK'])) { return $false }
+  if ($null -ne $Gate['minTotalWords'] -and ($M.totalWords -lt $Gate['minTotalWords'])) { return $false }
+  if ($null -ne $Gate['maxTotalWords'] -and ($M.totalWords -gt $Gate['maxTotalWords'])) { return $false }
 
   if ($Gate['requireAfterword'] -and (-not $M.hasAfterword)) { return $false }
 
@@ -180,6 +184,10 @@ foreach ($item in $items) {
     maxLen            = [int](Get-JsonProp -Obj $item -Name 'maxLen' -Default 0)
     minTotalCJK       = $(if ($null -ne $minTotalCJKProp -and $null -ne $minTotalCJKProp.Value) { [int]$minTotalCJKProp.Value } else { $null })
     maxTotalCJK       = $(if ($null -ne $maxTotalCJKProp -and $null -ne $maxTotalCJKProp.Value) { [int]$maxTotalCJKProp.Value } else { $null })
+    minWords          = [int](Get-JsonProp -Obj $item -Name 'minWords' -Default 0)
+    maxWords          = [int](Get-JsonProp -Obj $item -Name 'maxWords' -Default 0)
+    minTotalWords     = $(if ($null -ne $item.PSObject.Properties['minTotalWords'] -and $null -ne $item.PSObject.Properties['minTotalWords'].Value) { [int]$item.PSObject.Properties['minTotalWords'].Value } else { $null })
+    maxTotalWords     = $(if ($null -ne $item.PSObject.Properties['maxTotalWords'] -and $null -ne $item.PSObject.Properties['maxTotalWords'].Value) { [int]$item.PSObject.Properties['maxTotalWords'].Value } else { $null })
     requireAfterword  = [bool](Get-JsonProp -Obj $item -Name 'requireAfterword' -Default $false)
     minAfterwordCJK   = [int](Get-JsonProp -Obj $item -Name 'minAfterwordCJK' -Default 0)
     maxAfterwordCJK   = [int](Get-JsonProp -Obj $item -Name 'maxAfterwordCJK' -Default 0)
@@ -198,6 +206,8 @@ foreach ($item in $items) {
     totalCJK      = 0
     len           = 0
     cjk           = 0
+    words         = 0
+    totalWords    = 0
     lines         = 0
     afterwordLen  = 0
     afterwordCJK  = 0
@@ -211,6 +221,7 @@ foreach ($item in $items) {
 
     $m.totalLen = $text.Length
     $m.totalCJK = $CjkRe.Matches($text).Count
+    $m.totalWords = $WordRe.Matches($text).Count
 
     # 严格按配置中指定的标记进行分割。
     # SOP口径：正文以"## 作者有话说"前为准（或config显式指定的marker）。
@@ -243,6 +254,7 @@ foreach ($item in $items) {
     $m.hasAfterword = $hasAfter
     $m.len = $body.Length
     $m.cjk = $CjkRe.Matches($body).Count
+    $m.words = $WordRe.Matches($body).Count
     $m.lines = ($body -split "`r?`n").Length
 
     $m.afterwordLen = $after.Length
@@ -260,6 +272,10 @@ foreach ($item in $items) {
     maxLen           = $gate['maxLen']
     minTotalCJK      = $gate['minTotalCJK']
     maxTotalCJK      = $gate['maxTotalCJK']
+    minWords         = $gate['minWords']
+    maxWords         = $gate['maxWords']
+    minTotalWords    = $gate['minTotalWords']
+    maxTotalWords    = $gate['maxTotalWords']
     requireAfterword = $gate['requireAfterword']
     minAfterwordCJK  = $gate['minAfterwordCJK']
     maxAfterwordCJK  = $gate['maxAfterwordCJK']
@@ -271,6 +287,8 @@ foreach ($item in $items) {
     totalCJK         = $m.totalCJK
     len              = $m.len
     cjk              = $m.cjk
+    words            = $m.words
+    totalWords       = $m.totalWords
     lines            = $m.lines
     afterwordLen     = $m.afterwordLen
     afterwordCJK     = $m.afterwordCJK
