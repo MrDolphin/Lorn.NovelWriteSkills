@@ -224,7 +224,7 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于“百度百家号/�
 
 #### 5.5 拓展设置（必选）
 
-- “拓展设置”必须勾选“支持”。
+- “拓展设置”必须勾选“支持用户打赏”。
 
 ### 步骤 6：保存草稿
 
@@ -334,10 +334,112 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于“百度百家号/�
 
 ## 实操经验沉淀（百度百家号）
 
-- 新建章节保存后 URL 会切到 `pay_read_action=update` 并出现 `article_id`，这是回写章节Id最稳定来源。
-- 每章保存前先做“基础信息五项”复核，能减少保存后返工。
-- 标题输入前先拼好 `第X章 标题文本`，能避免章节号漏填或空格遗漏。
-- 每章结束以“存草稿成功”提示为唯一完成信号，没有成功提示就不算完成。
+### 标题填充（关键）
+
+- 标题区是 `contenteditable` 段落（`ref=e193`），不是标准 `<input>`。`type_in_page` 工具对该元素不可靠。
+- **可靠方法**：用 Playwright 定位 `locator('text=请输入标题').locator('..')` → `click()` → `Control+A` 全选 → `keyboard.type(标题文本, {delay: 0})`。
+- 标题格式固定为 `第{绝对章节号}章 {章节标题}`，章号与标题之间 **1 个空格**。
+- 标题字数计数器（`N/64`）可用来验证填充是否成功。
+
+### 正文填充（关键，禁止剪贴板）
+
+- **禁止使用剪贴板**：剪贴板易被其他操作覆盖，不可靠。
+- **必须使用本地 HTTP 正文服务器**（`scripts/bjh_body_server.mjs`）：
+  ```powershell
+  # 启动服务器（异步，上传期间保持运行）
+  node scripts/bjh_body_server.mjs --dir "百度百家号/第1卷" --port 8765
+  ```
+- 服务器接口：
+  - `GET /ch/{章号}` → 纯文本正文（已自动去除标题行）
+  - `GET /ch/{章号}/title` → 纯文本标题
+  - `GET /health` → 健康检查 + 可用章号列表
+- Playwright 中通过 `fetch` 获取正文并直接注入 iframe：
+  ```javascript
+  const chNum = 36;
+  const resp = await fetch(`http://127.0.0.1:8765/ch/${chNum}`);
+  const bodyText = await resp.text();
+
+  const iframe = page.frameLocator('iframe').first();
+  const bodyEl = iframe.locator('body').first();
+  // 清空后用 evaluate 设置 textContent（比 innerHTML 更安全）
+  await bodyEl.evaluate(el => { el.textContent = ''; });
+  await bodyEl.evaluate((el, text) => { el.textContent = text; }, bodyText);
+  ```
+- 此方案完全消除剪贴板竞态风险，正文直接由 Node.js 文件系统 → HTTP → Playwright 注入，不经过 OS 剪贴板。
+
+### 批量预处理提效
+
+- 打开浏览器前一次性完成：章节号提取、绝对章节号计算、新建/修改模式预判。
+- **不需要**预处理正文文件到临时目录——正文服务器直接读原始章节文件并实时去标题行。
+- 字体大小"19"会自动从上一章继承，无需每章设置。
+
+- 五项必设：本章节免费、本章节进推荐、个人原创、支持用户打赏、已选专栏匹配。
+- **设置顺序**：先点 `text=本章节免费`（默认是"本章节付费"），再点 `text=个人原创`。
+- "支持用户打赏"和"本章节进推荐"默认通常已勾选，但仍需每章复核。
+- 专栏名可能显示为简写（如"陆深被写进案卷"而非"刑警陆深被写进案卷"），应以 `set_id` 一致性和"已添加N篇"计数器为准。
+
+### 保存草稿（时机与验证）
+
+- 填完正文后等待页面自动保存提示变为"已保存"再点击"存草稿"按钮。
+- 保存按钮定位：`button:has-text("存草稿")`。
+- 保存成功后 URL 从 `pay_read_action=add` 切到 `pay_read_action=update&pay_read_status=draft`，同时出现 `article_id=` 参数。
+- 从 `page.url()` 提取 `article_id`，这是回写分发记录的最稳定来源。
+
+### 单章 Playwright 完整模板
+
+推荐将整章操作合并到一个 `run_playwright_code` 调用中，减少工具往返：
+
+```javascript
+const CH = 36; // 当前绝对章节号
+const TITLE = '第36章 排班写"休息、不在岗"，为何仍无法排除安全主管进入NVR机房';
+
+// 1. 从正文服务器获取正文
+const resp = await fetch(`http://127.0.0.1:8765/ch/${CH}`);
+const bodyText = await resp.text();
+
+// 2. 填标题
+const titleArea = page.locator('text=请输入标题').locator('..');
+await titleArea.click();
+await page.keyboard.press('Control+a');
+await page.keyboard.type(TITLE, {delay: 0});
+await page.waitForTimeout(300);
+
+// 3. 填正文（注入 iframe）
+const iframe = page.frameLocator('iframe').first();
+const bodyEl = iframe.locator('body').first();
+await bodyEl.evaluate(el => { el.textContent = ''; });
+await bodyEl.evaluate((el, text) => { el.textContent = text; }, bodyText);
+await page.waitForTimeout(500);
+
+// 4. 基础设置
+await page.click('text=本章节免费');
+await page.waitForTimeout(200);
+await page.click('text=个人原创');
+await page.waitForTimeout(200);
+
+// 5. 存草稿
+await page.click('button:has-text("存草稿")');
+await page.waitForTimeout(3000);
+
+// 6. 返回 article_id
+return page.url();
+```
+
+- 每章结束后立即回写分发记录，不要等全部完成再批量回写。
+
+### 常见失败与修复
+
+| 失败现象 | 原因 | 修复 |
+|:--|:--|:--|
+| "标题不能为空" | `type_in_page` 未真正填入标题 | 改用 Playwright 键盘输入标题 |
+| 存草稿无反应 | 页面未完成自动保存 | 等待"已保存"状态后再点击 |
+| 正文粘贴后格式错乱 | 剪贴板被覆盖或 `Control+V` 异步失败 | 改用 HTTP 正文服务器 + `textContent` 注入 |
+| 正文未填入 | `evaluate` 中 `textContent` 被 CSP 或编辑器拦截 | 降级为 `innerHTML`：`el.innerHTML = text.replace(/\n/g, '<br>')` 后手动触发编辑器 `input` 事件 |
+
+### 批次大小建议
+
+- **5 章/批**是最佳平衡点：速度快、失败面小、回滚成本低。
+- 每批完成后做对账：`计划章数 = 成功章数 + 失败章数`，且成功章均完成章节Id回写。
 
 ## 完成检查清单
 

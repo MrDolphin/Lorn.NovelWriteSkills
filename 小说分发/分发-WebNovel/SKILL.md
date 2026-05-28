@@ -348,24 +348,45 @@ WebNovel 的 iframe 富文本编辑器**不会自动检测 DOM 变更**。仅用
 
 **正确的注入与触发流程：**
 
+```javascript
+// 正文注入 + 变更检测（完整正确流程）
+const frameEl = await page.locator('iframe').first().elementHandle();
+const frame = await frameEl.contentFrame();
+
+// 1. 聚焦编辑器
+const body = frame.locator('body');
+await body.click();
+
+// 2. 注入正文（按单换行拆分，每一行独立成段）
+await frame.evaluate((text) => {
+  document.body.innerHTML = '';
+  const lines = text.split('\n');
+  // 去掉首尾空行
+  while (lines.length > 0 && lines[0].trim() === '') lines.shift();
+  while (lines.length > 0 && lines[lines.length - 1].trim() === '') lines.pop();
+  // 每行一个 <p>，空行用 &nbsp; 占位保留行间距
+  for (const line of lines) {
+    const trimmed = line.trim();
+    const el = document.createElement('p');
+    el.textContent = trimmed || '\u00A0';
+    document.body.appendChild(el);
+  }
+}, bodyText);
+
+// 3. 触发编辑器变更检测
+await body.press('End');        // 等待 100ms
+await body.press('Space');      // 等待 100ms
+await body.press('Backspace');  // 等待 300ms
+// 点击 SAVE
 ```
-1. frame.locator('body').click()        // 聚焦编辑器
-2. frame.evaluate(() => {               // 注入正文
-     document.body.innerHTML = '';
-     text.split('\n\n').forEach(p => {
-       const el = document.createElement('p');
-       el.textContent = p.trim();
-       document.body.appendChild(el);
-     });
-   }, bodyText)
-3. body.press('End')                    // 触发编辑器 input 事件
-4. 等待 100ms
-5. body.press('Space')                  // 制造一次真实键盘输入
-6. 等待 100ms
-7. body.press('Backspace')              // 撤销，但变更检测已完成
-8. 等待 300ms                           // 等编辑器状态刷新
-9. 点击 SAVE                            // 此时保存才能成功
-```
+
+> **⚠️ 分段铁律**：正文**必须按 `\n`（单换行）拆分**，每一行都是独立 `<p>`，**禁止用 `\n\n`（双换行）合并多行为一段**。
+>
+> WebNovel 英文版章节采用"句句独立成行 + 空行区分大段"的风格，HTML `<p>.textContent` 中的单换行 `\n` 会被浏览器折叠成空格，导致相邻行粘连成一个无法阅读的文本块。`split('\n\n')` 的合并逻辑在此场景下是**致命错误**，会造成已上传章节失去全部分段。已上传章节需以 `split('\n')` 方式重新上传覆盖修复。<｜end▁of▁thinking｜>
+
+<｜｜DSML｜｜tool_calls>
+<｜｜DSML｜｜invoke name="replace_string_in_file">
+<｜｜DSML｜｜parameter name="filePath" string="true">d:\Users\lorns\OneDrive\第二职业\网文写作\坍缩侦探\小说分发\分发-WebNovel\SKILL.md
 
 **教训**：不要假设"内容可见 = 编辑器已识别"。任何直接操作 DOM 的注入方式，末尾必须跟一次真实键盘事件（End → 打印字符 → 删除）来激活编辑器的变更追踪。
 
@@ -424,6 +445,7 @@ titleInput.fill(text)   // 再填入
 | 症状 | 根因 | 修复 |
 |:---|:---|:---|
 | SAVE 后 URL 仍为 `/chapter/create/...` | 编辑器未检测到内容变更 | 在注入正文后加 End→Space→Backspace |
+| **上传后章节无分行分段，正文为一整块** | **用 `split('\n\n')` 合并多行为一段，`textContent` 中 `\n` 被 HTML 折叠** | **改用 `split('\n')`，每行独立 `<p>`** |
 | 标题未更新 | 直接用 `fill()` 未先清空 | 先 `fill('')` 再 `fill(text)` |
 | 作者有话说未保存 | 未点 SUBMIT 或浮层遮挡 | 先消 "got it!" 浮层，再填 textarea + SUBMIT |
 | 章节内容串到上一章 | 草稿弹窗点了 USE | 点 Cancel 清空后重新填写 |

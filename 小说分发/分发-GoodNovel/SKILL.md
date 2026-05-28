@@ -325,11 +325,51 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于 `GoodNovel/` 目录�
 
 ## 实操经验沉淀（基于已知页面信息与分发逻辑）
 
+### 登录与入口
+
 - `www.goodnovel.com` 登录步骤必须留给用户手动完成；这是硬边界。
+- `https://www.goodnovel.com/uc/stories` 在未登录时会**静默重定向到首页**，不会自动跳转到登录页。更可靠的入口是直接导航到 `https://www.goodnovel.com/login`，用户登录后，手动导航到 `/create_chapter/{书籍Id}` 或用 Playwright 跳转。
+- 登录页有一个 "Signin to Good Novel" 按钮，点击后弹出登录表单（Google / Facebook / 邮箱等）。
+
+### 编辑器与正文输入
+
+- GoodNovel 编辑器是 **TinyMCE**（可通过 `typeof tinymce !== 'undefined'` 检测）。
+- **关键坑：直接操作 iframe body 的 innerHTML 不会触发 TinyMCE 的内部变更事件**，导致点击 SAVE 时出现 "Drafts can't be saved when empty" 错误。
+- **正确做法**：必须使用 `tinymce.activeEditor.setContent(html)` 写入内容，然后调用 `tinymce.activeEditor.fire('change')` 触发变更检测。仅当 TinyMCE 感知到内容变更后，SAVE 按钮才会真正保存。
+- 写入正文前务必先清除 `## 作者有话说` 段落及其后所有内容——该平台没有独立作者有话说入口。
+
+### 批量上传数据通道
+
+- 对于大批量（10+ 章），**不要**在 Playwright `page.evaluate()` 中硬编码大段文本字符串，这会导致超时和上下文销毁。
+- **推荐方案**：
+  1. 用 Node.js 脚本在本地预提取所有章正文（去掉标题行与作者有话说），写入 `.cache/content_parts/` 目录。
+  2. 启动一个极简 HTTP 静态服务（如 `node -e "require('http').createServer(...)"` 监听 `localhost` 端口），按章号返回预提取文本。
+  3. 浏览器端通过 `fetch('http://localhost:18765/ch/{n}')` 获取正文，再用 `tinymce.activeEditor.setContent()` 写入。
+- 这个方式将"读文件"和"写编辑器"解耦：Node.js 负责读文件，浏览器只负责填表单，大幅降低单章耗时。
+
+### 页面导航抖动
+
+- 点击 SAVE 后，GoodNovel 会创建一条新的 "Untitled Chapter" 草稿行并自动切换到该空章节；编辑器状态会重置（标题框清空、TinyMCE 清空）。
+- 偶尔 SAVE 后页面会触发整页导航（URL 不变但 DOM 重建），导致 Playwright 报 "Execution context was destroyed"。此时必须 `waitForTimeout(1500)` 等待新上下文就绪后重试。
+- SAVE 后左侧章节列表会立即出现新章节，可通过轮询 `li` 元素中 `Chapter {N}` 的文本确认保存成功。
+
+### 章节标题与侧边栏
+
 - 修改模式不是直接用章节ID跳转，而是先用 `chapterId=0` 打开编辑入口，再在左侧章节列表点目标章节。
 - 左侧列表会显示章节标题和状态，二者一起用来定位目标章，比只看标题更稳。
 - 该平台没有“作者有话说”入口，别在正文里“强行拼贴”。
 - 无章节ID并不等于无台账：通过“章节唯一键 + 标题/状态快照 + 最近保存入口URL”一样能实现可追溯增量更新。
+
+### 字数与实际表现
+
+- GoodNovel 编辑器右下角显示 "Ideal word count: 600-1000"，但**仅为建议**，长章节（本次最大单章 7657 words / 51959 chars）保存和发布均无阻断。不需要为凑 1000 words 拆分章节。
+
+### 典型单章节拍（秒级提效版）
+
+1. `page.locator('input[placeholder="Chapter title"]').fill('Chapter {N} {Title}')` —— 填标题
+2. `page.evaluate(async (n) => { const res = await fetch('http://localhost:18765/ch/' + n); ... tinymce.activeEditor.setContent(html); tinymce.activeEditor.fire('change'); }, chNum)` —— 拉取正文 + 写入 TinyMCE
+3. `click SAVE` —— 保存
+4. 等待 1-2 秒，继续下一章
 
 ## 最小可执行检查表（10秒版）
 
