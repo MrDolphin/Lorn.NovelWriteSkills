@@ -1,0 +1,103 @@
+---
+user-invocable: true
+description: 将 deep 调研结果汇总为小说创作者可直接使用的 Markdown 研究报告，覆盖所有字段，跳过不确定值。报告落盘到项目或题材的 `写作研究/` 目录。
+allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
+---
+
+# Research Report - 小说写作研究报告生成
+
+## 触发方式
+`/research-report`
+
+## 执行流程
+
+### Step 1: 定位结果目录
+在当前工作目录查找 `*/outline.yaml`，读取 topic、research_domain 和 output_dir 配置。
+
+### Step 2: 扫描可选摘要字段
+读取所有 JSON 结果，提取适合在目录中显示的字段（数值型、简短指标），例如：
+- market_share（市场份额）
+- reader_rating（读者评分）
+- growth_trend（增长趋势）
+- search_heat（搜索热度）
+- publication_count（作品数量）
+
+使用 AskUserQuestion 询问用户：
+- 目录中除了 item 名称外，还需要显示哪些摘要字段？
+- 提供动态选项列表（基于实际 JSON 中存在的字段）
+
+### Step 3: 生成 Python 转换脚本
+在 `{topic}/` 目录下生成 `generate_report.py`，脚本要求：
+- 读取 output_dir 下所有 JSON
+- 读取 fields.yaml 获取字段结构
+- 覆盖每个 JSON 的所有字段值
+- 跳过值包含 `[不确定]` 的字段
+- 跳过 uncertain 数组中列出的字段
+- 生成 Markdown 报告格式：目录（带锚点跳转+用户选择的摘要字段）+ 详细内容（按字段分类）+ **创作可迁移总结**
+- 保存到 `{topic}/report.md`
+
+**目录格式要求**：
+- 必须包含每一个 item
+- 每个 item 显示：序号、名称（锚点链接）、用户选择的摘要字段
+- 示例：`1. [读者偏好迁移](#读者偏好迁移) - 增长趋势: ↑15% | 搜索热度: 高`
+
+#### 脚本技术要点（必须遵循）
+
+**1. JSON 结构兼容**
+支持两种 JSON 结构：
+- 扁平结构：字段直接在顶层 `{"name": "xxx", "market_share": "xxx"}`
+- 嵌套结构：字段在 category 子 dict 中 `{"市场数据": {"name": "xxx"}, "内容特征": {...}}`
+
+字段查找顺序：顶层 → category 映射 key → 遍历所有嵌套 dict
+
+**2. Category 多语言映射**
+fields.yaml 的 category 名与 JSON 的 key 可能是任意组合（中中、中英、英中、英英）。必须建立双向映射：
+```python
+CATEGORY_MAPPING = {
+    "市场数据": ["market_data", "市场数据"],
+    "内容特征": ["content_features", "内容特征"],
+    "读者反馈": ["reader_feedback", "读者反馈"],
+    "专业知识": ["domain_knowledge", "professional_knowledge", "专业知识"],
+    "人物特征": ["character_traits", "人物特征"],
+    "场景细节": ["scene_details", "场景细节"],
+    "技法要素": ["technique_elements", "技法要素"],
+    "创作可迁移": ["transferable_insights", "创作可迁移"],
+}
+```
+
+**3. 复杂值格式化**
+- list of dicts：每个 dict 格式化为一行，用 ` | ` 分隔 kv
+- 普通 list：短列表用逗号连接，长列表换行显示
+- 嵌套 dict：递归格式化，用分号或换行显示
+- 长文本字符串（超过 100 字符）：添加换行符 `<br>` 或使用 blockquote 格式，提高可读性
+
+**4. 额外字段收集**
+收集 JSON 中有但 fields.yaml 中没定义的字段，放入"其他信息"分类。注意过滤：
+- 内部字段：`_source_file`、`uncertain`
+- 嵌套结构顶级 key：`市场数据`、`内容特征` 等
+- `uncertain` 数组：需要逐行显示每个字段名，不要压缩成一行
+
+**5. 不确定值跳过**
+跳过条件：
+- 字段值包含 `[不确定]` 字符串
+- 字段名在 `uncertain` 数组中
+- 字段值为 None 或空字符串
+
+**6. 创作可迁移总结（新增，强制）**
+报告末尾必须生成一个 **"创作可用结论与抓手"** 部分，将全部研究发现翻译成小说创作者可以直接使用的行动建议：
+- 按"可直接用于正文"、"可用于设定/大纲"、"需要进一步研究"三级分类
+- 每条建议必须具体到：可以写什么场景、可以怎么用、可以用在什么类型的情节中
+- 这是整个研究报告的核心价值产出，不能跳过或敷衍
+
+### Step 4: 询问报告落盘路径
+使用 AskUserQuestion 询问用户：
+- 报告应保存到哪个目录？（建议保存到项目或题材目录的 `写作研究/` 下）
+- 是否需要同时生成一份精简版（仅含"创作可用结论与抓手"）？
+
+### Step 5: 执行脚本
+运行 `python {topic}/generate_report.py`
+
+## 输出
+- `{topic}/generate_report.py` - 转换脚本
+- `{topic}/report.md` - 完整研究报告
+- `{写作研究目录}/{研究域简称}_{课题简述}.md` - 最终落盘文件（可选精简版）

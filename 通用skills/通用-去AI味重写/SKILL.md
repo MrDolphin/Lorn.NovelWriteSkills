@@ -32,6 +32,7 @@ argument-hint: '要处理哪一章或哪一段？默认先做一句病灶诊断�
 - `references/去AI味风格与排版补充.md`
 - `references/AI味高发信号与拆洗策略补充.md`
 - `references/去雕琢腔与透明人声校准卡.md`
+- `references/视角塌陷与五感替代诊断修复卡.md`（**必读** — 视角塌了诊断、五感替换法、摄像头视角实操、有效细节vs无用拖沓、角色独白练习）
 - `references/去AI味后供血与职责复检卡.md`
 - `references/腾讯专栏直白与氛围保持增补.md`
 
