@@ -51,6 +51,8 @@ applyTo: "**/SKILL.md"
 5. 关键边界与硬规则
 6. 如有补充规范，明确要求继续读取哪些 `references/` 文件
 
+**缓存优化要求**：Skill 中各节的排列顺序应遵循前缀缓存优化原则 —— 跨调用完全不变的规则（触发词、硬规则、references 清单）放在最前面，项目级稳定的规则（自动发现规则、模板路由）放在中间，仅本次任务变化的参数放在最后。详见 `.github/instructions/cache-optimization.instructions.md`。
+
 ## frontmatter 规范
 
 - 必须有 `name`
