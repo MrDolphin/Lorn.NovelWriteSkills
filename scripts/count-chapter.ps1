@@ -20,13 +20,13 @@ if ($null -eq $content) {
 $bodyEnd = $content.Length
 $bodyEndLine = -1
 
-$authorTalkMatch = [regex]::Match($content, '(?m)^## 作者有话说\b.*$')
+$authorTalkMatch = [regex]::Match($content, '(?m)^## 作者有话说.*$')
 if ($authorTalkMatch.Success) {
     $bodyEnd = $authorTalkMatch.Index
     $bodyEndLine = ($content.Substring(0, $bodyEnd) -split "`n").Count
 }
 else {
-    $epilogueMatch = [regex]::Match($content, '(?m)^## 章节后记\b.*$')
+    $epilogueMatch = [regex]::Match($content, '(?m)^## 章节后记.*$')
     if ($epilogueMatch.Success) {
         $bodyEnd = $epilogueMatch.Index
         $bodyEndLine = ($content.Substring(0, $bodyEnd) -split "`n").Count
