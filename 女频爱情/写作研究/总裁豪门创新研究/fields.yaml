@@ -1,0 +1,94 @@
+# 字段定义
+
+fields:
+  - id: "套路疲劳清单"
+    description: "读者明确表现出审美疲劳的套路/情节/人设的具体清单"
+    collection: true
+    format: "list of {套路名称: 读者疲劳证据: 所在平台: 疲劳程度(高/中/低)}"
+
+  - id: "吐槽高频元素"
+    description: "读者评论中反复出现的吐槽关键词和典型句式"
+    collection: true
+    format: "list of {吐槽元素: 典型评论摘录: 出现频率}"
+
+  - id: "弃书原因统计"
+    description: "读者明确说的弃书原因归类"
+    collection: true
+    format: "map of {原因类别: 具体表现: 读者原话摘录}"
+
+  - id: "平台差异"
+    description: "不同平台上同一问题的表现差异"
+    format: "free text"
+
+  - id: "创新设定"
+    description: "作品的核心创新点"
+    collection: true
+    format: "list of {作品名: 平台: 创新维度: 创新描述: 成绩指标}"
+
+  - id: "题材融合"
+    description: "不同题材元素融合的方式与效果"
+    collection: true
+    format: "list of {融合类型: 代表作品: 融合手法: 读者接受度}"
+
+  - id: "叙事实验"
+    description: "叙事结构/视角/时间线上的创新尝试"
+    collection: true
+    format: "list of {实验类型: 作品案例: 效果评估}"
+
+  - id: "成绩表现"
+    description: "作品的公开成绩数据"
+    format: "free text"
+
+  - id: "读者反馈"
+    description: "读者对创新尝试的真实反应"
+    format: "free text"
+
+  - id: "韩剧创新"
+    description: "韩剧在财阀/豪门爱情叙事上的创新手法"
+    collection: true
+    format: "list of {韩剧名: 创新维度: 具体手法: 对网文的可迁移性}"
+
+  - id: "跨文化差异"
+    description: "中西方/中韩在总裁叙事上的根本差异"
+    format: "free text"
+
+  - id: "可迁移手法"
+    description: "可以移植到中文网文的具体技法"
+    collection: true
+    format: "list of {手法: 来源: 迁移建议: 风险提示}"
+
+  - id: "短剧节奏特征"
+    description: "短剧特有的叙事节奏规律"
+    format: "free text"
+
+  - id: "可吸收手法"
+    description: "短剧中可以吸收到长篇网文的技法"
+    collection: true
+    format: "list of {手法: 短剧来源: 长篇适配建议}"
+
+  - id: "女主独立性要求"
+    description: "读者对女主独立性的具体期望"
+    format: "free text"
+
+  - id: "关系平等期待"
+    description: "读者对男女主关系平等的具体期待"
+    format: "free text"
+
+  - id: "职业线权重"
+    description: "读者对女主职业线篇幅与深度的期待"
+    format: "free text"
+
+  - id: "融合类型"
+    description: "总裁与其他题材的融合模式"
+    collection: true
+    format: "list of {融合模式: 可行性: 代表作品}"
+
+  - id: "成功案例"
+    description: "已取得市场成功的融合案例"
+    collection: true
+    format: "list of {作品名: 平台: 融合度: 成绩: 关键成功因素}"
+
+  - id: "融合风险"
+    description: "融合创作可能带来的风险与问题"
+    collection: true
+    format: "list of {风险类型: 具体表现: 规避建议}"
