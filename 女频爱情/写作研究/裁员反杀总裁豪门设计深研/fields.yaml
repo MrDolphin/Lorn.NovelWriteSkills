@@ -1,0 +1,67 @@
+# 字段定义
+
+fields:
+  - id: "短剧案例"
+    description: "短剧市场中的裁员反杀题材案例"
+    collection: true
+    format: "list of {作品名: 厂牌: 核心设定: 成绩: 可借鉴点}"
+
+  - id: "长篇改编策略"
+    description: "短剧模板向长篇连载改编的策略"
+    format: "free text"
+
+  - id: "差异化机会"
+    description: "长篇网文相比短剧的差异化空间"
+    format: "free text"
+
+  - id: "职业选择"
+    description: "女主职业设定的最佳选择区间"
+    collection: true
+    format: "list of {职业: 优势: 风险: 七猫适配度}"
+
+  - id: "专业深度阈值"
+    description: "读者可接受的专业描写深度上限"
+    format: "free text"
+
+  - id: "人设差异点"
+    description: "女主区别于竞品的独特人设要素"
+    format: "free text"
+
+  - id: "爽点类型"
+    description: "职场反杀方向的爽点分类"
+    collection: true
+    format: "list of {爽点类型: 触发方式: 预期效果}"
+
+  - id: "节奏控制"
+    description: "小周期与大周期的节奏设计"
+    format: "free text"
+
+  - id: "回报设计"
+    description: "每章/每单元必须兑现的回报类型"
+    collection: true
+    format: "list of {回报类型: 举例: 优先级}"
+
+  - id: "男主设定"
+    description: "男主角色定位与人设"
+    format: "free text"
+
+  - id: "关系入口"
+    description: "男女主首次关联的方式"
+    format: "free text"
+
+  - id: "权力平衡"
+    description: "关系中双方的权力分配"
+    format: "free text"
+
+  - id: "情绪共鸣点"
+    description: "裁员题材中最能引发读者共情的情绪按钮"
+    collection: true
+    format: "list of {情绪点: 触发场景: 共鸣强度}"
+
+  - id: "现实感尺度"
+    description: "故事应该保留多少现实质感"
+    format: "free text"
+
+  - id: "爽感平衡"
+    description: "现实痛感与阅读爽感之间的平衡点"
+    format: "free text"

@@ -171,10 +171,28 @@ prompt = f"""## 任务
 - **创作可迁移字段为必填**：每个 item 必须输出 `创作可用抓手` 字段，说明该研究发现能如何用于小说创作
 
 ### Step 6: 输出并确认
+
+#### 6.1 创建目录与保存文件
 - 创建目录: `./{topic_slug}/`
 - 保存: `outline.yaml` 和 `fields.yaml`
-- 展示给用户确认
-- 提示：若需追加条目或字段，可使用 `/research-add-items` 或 `/research-add-fields`
+
+#### 6.2 调研大纲确认（检查点1）
+展示以下摘要，**必须获得用户确认后才能进入 /research-deep**：
+
+```markdown
+## 调研大纲摘要
+- **研究课题**: [topic]
+- **主研究域**: [domain]
+- **辅助研究域**: [sub-domains，如有]
+- **调研条目**: [N] 项
+- **调研字段**: [M] 个（含 [K] 个创作可迁移字段）
+- **并行配置**: [batch_size] agent × [items_per_agent] 项/agent
+- **信息缺口预判**: [初步判断哪些维度信息可能稀缺——来自 nuwa-skill 的诚实前置原则]
+```
+
+#### 6.3 后续命令提示
+- 若需追加条目或字段，可使用 `/research-add-items` 或 `/research-add-fields`
+- 确认后执行 `/research-deep` 开始深度调研
 
 ## 输出路径
 ```
