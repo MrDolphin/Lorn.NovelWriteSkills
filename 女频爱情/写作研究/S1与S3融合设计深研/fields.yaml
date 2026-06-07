@@ -1,0 +1,101 @@
+# 字段定义
+
+fields:
+  - id: "S1核心优势"
+    description: "S1《封总》在商业化上取得成功的关键要素提取"
+    format: "free text"
+
+  - id: "S3核心优势"
+    description: "S3《第五年重逢》在文学性和情感深度上的关键要素提取"
+    format: "free text"
+
+  - id: "冲突点"
+    description: "两本书在风格/手法/节奏上的根本冲突"
+    collection: true
+    format: "list of {冲突维度: S1的倾向: S3的倾向: 可否调和}"
+
+  - id: "融合可能"
+    description: "两本书优势互补的具体可能性"
+    format: "free text"
+
+  - id: "开篇结构"
+    description: "融合后的开篇设计方案"
+    format: "free text"
+
+  - id: "伤害载体"
+    description: "核心情绪武器的选择与设计"
+    format: "free text"
+
+  - id: "情绪启动"
+    description: "前300字的情绪建立方式"
+    format: "free text"
+
+  - id: "三章闭环"
+    description: "三章内必须完成的情绪与叙事闭环"
+    format: "free text"
+
+  - id: "女主人设"
+    description: "女主的人格特征与吸引力设计"
+    format: "free text"
+
+  - id: "男主人设"
+    description: "男主的人格特征与关系定位"
+    format: "free text"
+
+  - id: "关系结构"
+    description: "男女主之间的权力平衡与情感张力来源"
+    format: "free text"
+
+  - id: "成长线"
+    description: "女主独立于关系线的成长弧线设计"
+    format: "free text"
+
+  - id: "章首模式"
+    description: "章节开头的入场方式"
+    format: "free text"
+
+  - id: "章末钩子"
+    description: "章节结尾的追读驱动力类型"
+    format: "free text"
+
+  - id: "回报间隔"
+    description: "每章/每单元的回报频率与类型"
+    format: "free text"
+
+  - id: "高潮布局"
+    description: "小高潮/中高潮/大高潮的分布策略"
+    format: "free text"
+
+  - id: "风格决策"
+    description: "文笔风格的总体策略——什么时候用效率体，什么时候用文学体"
+    format: "free text"
+
+  - id: "情绪表达"
+    description: "情绪的表达方式选择"
+    format: "free text"
+
+  - id: "感官密度"
+    description: "感官描写的密度与位置策略"
+    format: "free text"
+
+  - id: "禁忌清单"
+    description: "融合风格的禁止项"
+    collection: true
+    format: "list of {禁忌: 理由}"
+
+  - id: "目标设定"
+    description: "新书可达到的目标热度估值"
+    format: "free text"
+
+  - id: "可复制性"
+    description: "融合方法的可复制程度"
+    format: "free text"
+
+  - id: "风险控制"
+    description: "融合策略的主要风险与应对"
+    format: "free text"
+
+  - id: "超越点"
+    description: "新书相比S1可以超越的具体维度"
+    collection: true
+    format: "list of {超越维度: 理由: 可行性}"

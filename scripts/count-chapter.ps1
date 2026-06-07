@@ -2,8 +2,8 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$Path,
     [int]$MinLen = 0,
-    [int]$MinCJK = 3500,
-    [int]$MaxCJK = 6500
+    [int]$MinCJK = 2500,
+    [int]$MaxCJK = 5000
 )
 
 if (-not (Test-Path -LiteralPath $Path)) {

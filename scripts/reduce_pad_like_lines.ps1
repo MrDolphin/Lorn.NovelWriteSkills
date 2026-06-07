@@ -43,7 +43,7 @@ param(
   [int]$MaxKeepRun = 2,
 
   [Parameter()]
-  [int]$MinBodyCJK = 3500,
+  [int]$MinBodyCJK = 2500,
 
   # Optional override pattern. If empty, uses a conservative built-in heuristic.
   [Parameter()]

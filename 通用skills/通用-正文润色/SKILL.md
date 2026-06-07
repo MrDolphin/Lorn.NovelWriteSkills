@@ -94,7 +94,7 @@ argument-hint: '要润哪一章、哪一场景或哪几段？默认按“已有�
 4. 先修章首抓力，再修中段回报，再修章末钩子。
 5. 再按弱项路由处理对话、动作、心理、肖像、景物、静态或场面。
 6. 最后用“润色后链路职责保真复核卡”确认卖点、回报、钩子与场景职责没有被润平，再做句级精修、沉浸复检并直接回写。
-7. 若本轮改动影响正文篇幅，回写前必须重跑 `scripts/count-chapter.ps1 -MinCJK 3500 -MaxCJK 6500`；若本次连同 `## 作者有话说` 一并处理，再补跑 `scripts/count-afterword.ps1 -MinCJK 200 -MaxCJK 300`。
+7. 若本轮改动影响正文篇幅，回写前必须重跑字数门禁：字数参数按以下优先级确定：① 项目 `Agents.md` 中主输出平台指定 → ② 主输出平台对应 `通用-输出*版/SKILL.md` 的"平台默认字数范围" → ③ 通用回退值（中文正文 2500–5000 CJK）。用 `scripts/count-chapter.ps1`（参数取上述来源）；若本次连同 `## 作者有话说` 一并处理，再补跑 `scripts/count-afterword.ps1`（参数取上述来源）。
 	- 正文门禁只看脚本输出的 `BodyCJK / Meets3500 / WithinRange`；`Len` 只作参考。
 	- 不得用“去空白统计”“NoWhitespaceLen”或编辑器字符数代替 `BodyCJK`。
 
