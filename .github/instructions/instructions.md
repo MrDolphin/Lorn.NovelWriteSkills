@@ -72,3 +72,16 @@
 - 检查引用通用 Skill 时是否仅使用名称引用。
 - 检查新增名称是否采用中文命名。
 - 若涉及平台输出 Skill，检查是否遵循 `platform-output-skill-architecture.instructions.md` 中的分层与格式规范。
+
+## 修改 Skill 时的 references 活性检查
+
+修改任一 Skill（包括新增、补写、重写、重构、迁移）时，必须同步审查该 Skill 目录下 `references/` 文件夹的全部文件，并按以下规则更新 `SKILL.md`：
+
+- **逐文件检查**：逐一确认每个 `references/` 文件在 `SKILL.md` 正文中是否有对应的读取指令（如"继续读取"、"详细规则见"、"参见 references/xxx.md"），若无则说明该文件已失效或未被利用，应补入引用或清理。
+- **引用位置合理**：`references/` 文件不应只在文件列表中罗列，而应在 `SKILL.md` 的具体执行步骤、硬规则或补充规则节中有明确调度说明 —— 说明在何时、什么条件下、由哪一步读取该参考文件。
+- **去重与归并**：若修改后 `references/` 中出现内容重叠、冲突或旧版残留的文件，应归并或清理，不保留"可能还用得上"的冗余文件。
+- **与通用 Skill 的 references 边界**：若本次修改新增的内容属于题材无关的通用规则，应优先沉淀到对应通用 Skill 的 `references/` 中，而非留在题材 Skill 的 `references/` 下；题材 Skill 的 `references/` 只保留题材专属的补充规则。
+- **新增 references 及时注册**：若修改过程中在 `references/` 下新增了文件，必须在同一轮修改中在 `SKILL.md` 补充对应读取指令，不得留到后续再补。
+- **跨 Skill 引用也需检查**：若 `SKILL.md` 引用了其他 Skill 的 `references/` 文件（如 `../通用-执行场景单元/references/xxx.md`），同样应确认被引文件仍存在、路径正确、内容与当前 Skill 的诉求一致。
+
+目标：`references/` 中的每个文件在 `SKILL.md` 中都有明确的使用场景和读取时机，不存在沉淀之后就不再被调用的"死文件"。
