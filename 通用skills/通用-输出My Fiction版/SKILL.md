@@ -160,6 +160,7 @@ argument-hint: '要把哪一章输出为 My Fiction 版？默认按“保留核�
 ## 硬规则
 
 - 章节标题字数统计必须按**纯标题**口径执行：先去除开头 `x.y.z ` 形式的章节编号及其紧跟空格，再仅对剩余标题正文计数。
+- 调用 通用-设计标题 的嵌入式轻量模式对本章标题做平台适配优化，确保标题长度不超过本平台截断风险线、标题风格符合本平台读者预期。
 - My Fiction 平台章节标题纯标题长度不得超过 **70 个字符**；但限制字数不代表追求极短标题，应优先匹配平台互动追更与关系黏性风格，在不超限前提下尽量提高信息有效度。
 - 绝对禁止输出“抽象自述 + 动词模板 + 口径名词”的垃圾句群；凡出现类似“对照项落在… / 先把同一句话拆碎 / 先把顺滑的解释拆开 / 只求能追溯（复核、对得上）”等模板化短语，必须判定为污染并整稿回炉。
 - 严禁使用或间接调用以下脚本对正文做生成、扩写、拼接或降重：`scripts/append_cn_unique_monologue.ps1`、`scripts/append_cn_unique_narration.ps1`、`scripts/append_cn_unique_thirdperson.ps1`、`scripts/rephrase_cn_body.ps1`、`scripts/rephrase_en_body.ps1`、`scripts/cn_lexicon_profile_transform.ps1`。这些工具不得进入平台正文生产链路。
