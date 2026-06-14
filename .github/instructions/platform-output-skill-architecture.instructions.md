@@ -226,6 +226,6 @@ name: "平台输出Skill架构规范"
 
 ### 人物/设定追加到缓存区
 
-平台输出 Skill 的 `## 继续读取的 references` 中应声明人物传记、技术设定、各类模板的强制读取路径——这些文件随 Skill 一起加载到上下文前部，其固定部分同样享受缓存。
+平台输出 Skill 的 `## 继续读取的 references` 中应声明人物传记、故事设定、各类模板的强制读取路径——这些文件随 Skill 一起加载到上下文前部，其固定部分同样享受缓存。
 
 详见 `.github/instructions/cache-optimization.instructions.md`。
