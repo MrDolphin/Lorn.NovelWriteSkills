@@ -1,21 +1,21 @@
 ---
 name: 去AI味
-description: '去除都市悬疑小说正文的 AI 味。用于整章或局部改写，强调信息量零损失、中等节奏保全、第三人称有限视角、五感通感、口语化场景化专业表达、章内回报与章末钩子不被润坏。关键词：去AI味、正文改写、都市悬疑、起点、有限视角、代入感、章末钩子。'
+description: AI科幻小说正文的 AI 味。用于整章或局部改写，强调信息量零损失、中等节奏保全、第三人称有限视角、五感通感、口语化场景化专业表达、章内回报与章末钩子不被润坏。关键词：去AI味、正文改写、AI科幻、起点、有限视角、代入感、章末钩子。'
 argument-hint: '例如：给第12章整章去AI味 / 只处理这一段模板腔 / 不减信息地把这章改得更像人写的'
 agent: 小说作者
 ---
 
-# 都市悬疑小说正文去AI味专业指南
+# AI科幻小说正文去AI味专业指南
 
 ## 关联技能（去 AI 味专属）
 
-[`都市悬疑-去AI味重写`｜去 AI 味重写](../skills/都市悬疑-去AI味重写/SKILL.md)
+[`AI科幻-去AI味重写`｜去 AI 味重写](../skills/AI科幻-去AI味重写/SKILL.md)
 
 凡是“整章去AI味 / 局部模板腔清理 / 不减信息的人味改写 / 视角与数值双轨保护”任务，都应优先调用该 skill。
 
 ## 本 Prompt 只保留的职责
 
-- 把“去 AI 味”识别成一个必须优先加载 `都市悬疑-去AI味重写` 的任务入口
+- 把“去 AI 味”识别成一个必须优先加载 `AI科幻-去AI味重写` 的任务入口
 - 约束必须改动工作区里的真实文件，而不是只在聊天里示范
 - 约束范围不清时先用一句话确认边界
 - 约束聊天窗口默认只返回简短可核对的修改摘要，不整章贴文
@@ -31,7 +31,7 @@ agent: 小说作者
 
 ## 已迁入 Skill 的通用内容
 
-以下内容已迁入 `都市悬疑-去AI味重写` 与其 references，作为主承载层：
+以下内容已迁入 `AI科幻-去AI味重写` 与其 references，作为主承载层：
 
 - 顶层裁判顺序与读者文本红线
 - 长篇连载保全口径
@@ -42,13 +42,13 @@ agent: 小说作者
 
 ## Skill references（执行时必须加载）
 
-- `../skills/都市悬疑-去AI味重写/references/去AI味执行清单.md`
-- `../skills/都市悬疑-去AI味重写/references/数值双轨与视角保护.md`
-- `../skills/都市悬疑-去AI味重写/references/AI味识别雷达.md`
-- `../skills/都市悬疑-去AI味重写/references/三级改造与工具包.md`
-- `../skills/都市悬疑-去AI味重写/references/AI味识别与改写工具包.md`
-- `../skills/都市悬疑-去AI味重写/references/通用风格与排版补充.md`
-- `../skills/都市悬疑-去AI味重写/references/实战自检与陷阱.md`
+- `../skills/AI科幻-去AI味重写/references/去AI味执行清单.md`
+- `../skills/AI科幻-去AI味重写/references/数值双轨与视角保护.md`
+- `../skills/AI科幻-去AI味重写/references/AI味识别雷达.md`
+- `../skills/AI科幻-去AI味重写/references/三级改造与工具包.md`
+- `../skills/AI科幻-去AI味重写/references/AI味识别与改写工具包.md`
+- `../skills/AI科幻-去AI味重写/references/通用风格与排版补充.md`
+- `../skills/AI科幻-去AI味重写/references/实战自检与陷阱.md`
 
 其中：
 
