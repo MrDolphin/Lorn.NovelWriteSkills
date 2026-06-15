@@ -26,6 +26,7 @@ argument-hint: '要处理哪组AI科幻总纲层文件？默认按“总纲层�
 - `references/总纲专属设计规则.md`
 - `references/总纲模板与验收.md`
 - `references/故事面联动首卷承诺与平台闭环.md`
+- `references/矩阵式三卷架构参考.md`（AI觉醒三阶段×数字战争三维度，200万字卷级爽点锚点与伏笔布局）
 
 ## 常见触发词 / 用户说法速查
 
