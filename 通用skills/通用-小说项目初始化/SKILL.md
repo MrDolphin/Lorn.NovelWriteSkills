@@ -864,10 +864,10 @@ argument-hint: --platform 七猫 --genre 都市悬疑
 起点中文网
 
 ## 主输出平台POV
-expected: third
-lang: zh-CN
-baselineSource: source_draft
-switchPolicy: per_volume_approval_required
+叙事人称: 第三人称
+语言: 中文简体
+POV基线来源: 源稿
+切换策略: 每卷需审批
 ```
 
 ### 字段说明
@@ -880,10 +880,10 @@ switchPolicy: per_volume_approval_required
 
 **主输出平台POV**（推荐填写）：
 
-- `expected`：主输出平台预期的叙事人称。可选值：`first`（第一人称）、`second`（第二人称）、`third`（第三人称）。第三人称是绝大多数网文平台的默认值。
-- `lang`：语言。`zh-CN`（中文简体）、`zh-TW`（中文繁体）、`en`（英文）等。
-- `baselineSource`：POV 基线来源。固定值 `source_draft`，表示以源稿正文的既有视角链路为准。
-- `switchPolicy`：POV 切换策略。推荐值 `per_volume_approval_required`（每卷切换需审批），或 `locked`（全书锁定）。禁止在没有显式理由与日志审批的情况下在连载中途切换人称。
+- `叙事人称`：主输出平台预期的叙事人称。可选值：`第一人称`、`第二人称`、`第三人称`。第三人称是绝大多数网文平台的默认值。
+- `语言`：语言。`中文简体`、`中文繁体`、`英文`等。
+- `POV基线来源`：POV 基线来源。固定值 `源稿`，表示以源稿正文的既有视角链路为准。
+- `切换策略`：POV 切换策略。推荐值 `每卷需审批`（每卷切换需审批），或 `全书锁定`（全书锁定）。禁止在没有显式理由与日志审批的情况下在连载中途切换人称。
 
 此 POV 设置被 `通用-多平台输出编排` Skill 读取，作为各平台 `platformPovContract` 的默认初始值。对于输出多个平台的项目，应在执行多平台输出前补充 `平台POV基线表`（见 `通用-多平台输出编排`）。
 
@@ -896,10 +896,10 @@ switchPolicy: per_volume_approval_required
 起点中文网
 
 ## 主输出平台POV
-expected: third
-lang: zh-CN
-baselineSource: source_draft
-switchPolicy: per_volume_approval_required
+叙事人称: 第三人称
+语言: 中文简体
+POV基线来源: 源稿
+切换策略: 每卷需审批
 ```
 
 ### 示例：完整 Agents.md
@@ -912,10 +912,10 @@ switchPolicy: per_volume_approval_required
 起点中文网
 
 ## 主输出平台POV
-expected: third
-lang: zh-CN
-baselineSource: source_draft
-switchPolicy: per_volume_approval_required
+叙事人称: 第三人称
+语言: 中文简体
+POV基线来源: 源稿
+切换策略: 每卷需审批
 ```
 
 ### 产出物
