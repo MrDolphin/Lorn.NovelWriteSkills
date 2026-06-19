@@ -2,8 +2,8 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$Path,
     [int]$MinLen = 0,
-    [int]$MinCJK = 2500,
-    [int]$MaxCJK = 5000
+    [int]$MinCJK = 2000,
+    [int]$MaxCJK = 3500
 )
 
 if (-not (Test-Path -LiteralPath $Path)) {
@@ -54,7 +54,7 @@ $result = [PSCustomObject]@{
     MinCJK = $MinCJK
     MaxCJK = $MaxCJK
     MeetsLen = $meetsLen
-    Meets3500 = $meetsCJKMin
+    MeetsMinCJK = $meetsCJKMin  # 检测是否达到 MinCJK={$MinCJK} 门槛
     MeetsCJKMin = $meetsCJKMin
     WithinRange = $withinCJKRange
     WithinCJKRange = $withinCJKRange

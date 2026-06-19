@@ -2,7 +2,7 @@
 name: 多平台输出SOP
 description: '为女频爱情章节执行多平台输出的统一入口。用于把单章或多章按指定平台集合改写、落盘、门禁、终检并输出摘要；默认先路由到题材多平台输出编排 Skill。'
 argument-hint: '给我 chapterPath 或 chapterPaths；可选 platforms（未指定时从项目根目录 平台POV基线表 读取）。'
-agent: 小说作者
+agent: Plan
 ---
 
 # 多平台输出 SOP
