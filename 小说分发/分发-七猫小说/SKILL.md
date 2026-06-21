@@ -218,16 +218,76 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于“七猫小说/”�
 - 七猫章节编号如“第2章”无法修改，直接跳过。
 - 章节标题填写为章节内容第1行提取的标题。
 
-### 步骤 6：填写正文
+### 步骤 6：填写正文（Quill 编辑器——必须有键盘粘贴，禁用 `fill()` / DOM 操作）
 
-1. 在正文文本框输入该章节正文。
-2. 必须确保正文来自你指定的章节文件，不得错章串章。
+> **▲ 高警告：该编辑器的 Quill 内核会把 `fill()`、`innerHTML`、`appendChild` 等 DOM 直写视为"非法外部操作"，导致正文被截断至 30–60% 且无任何报错。这是本 Skill 历史上最严重的事故根因。下方是唯一安全方法。**
 
-### 步骤 7：添加作者有话说
+1. **前置：将正文复制到系统剪贴板**
+   - 使用 PowerShell 或 Playwright 调用系统剪贴板 API 将清理后的正文写入剪贴板：
+   ```powershell
+   # PowerShell 示例（从文件提取正文并去掉标题行和后记）：
+   $c = [System.IO.File]::ReadAllText($chapterPath)
+   $body = $c -replace '(?s)^# .+?\n\n',''
+   $body = $body -replace '(?s)\n\n## 作者有话说.*',''
+   Set-Clipboard $body
+   ```
+   - 或在 Playwright 中用 `navigator.clipboard.writeText(fullBody)`。
 
-- 作者有话说直接在章节编辑页面出现，无需点击按钮，直接输入内容即可。
-- 输入前建议先全选清空旧内容，再输入该章“作者有话说”内容，避免与历史文本拼接。
-- 输入后必须检查计数器（如有，常见为 `X/300`）：
+2. **填入标题后，聚焦正文编辑器**
+   - 定位 `.q-contenteditable.book` 第一个元素，点击使其获得焦点。
+   - 点击后等待至少 200ms 确保编辑器就绪。
+
+3. **全选 + 清空（避免残留）**
+   - 发送 `Control+A`（全选），然后 `Delete`（删除选中内容）。
+   - 等待至少 200ms。
+
+4. **粘贴正文**
+   - 发送 `Control+V`。
+   - **必须等待至少 3 秒**给 Quill 完成异步内容处理（大段正文可能需要更久，安全值为 3–5 秒）。
+
+5. **清理粘贴自带的 Markdown 头尾（关键副步骤）**
+   - 粘贴后编辑器会包含源文件中的 `#第N章` 行和 `##作者有话说`/`## 章节后记` 等不应出现在正文的区域。
+   - 用 Playwright 执行 DOM 清理：
+   ```javascript
+   const editor = document.querySelector('.q-contenteditable.book');
+   const ps = editor.querySelectorAll('p');
+   // 移除第一个段落（#第N章行）
+   if (ps[0] && ps[0].textContent?.startsWith('#第')) ps[0].remove();
+   // 移除 作者有话说 及其后的所有内容
+   for (const p of ps) {
+     if (p.textContent?.includes('##作者有话说') || p.textContent?.includes('## 作者有话说')) {
+       let c = p; while (c) { const n = c.nextElementSibling; c.remove(); c = n; } break;
+     }
+   }
+   // 触发 Quill 的 input 事件，刷新字数统计
+   editor.dispatchEvent(new Event('input', { bubbles: true }));
+   ```
+
+6. **字数验证（强制——少一个字都不行）**
+   - 清理后立即读取页面上的"当前字数"显示：
+     ```javascript
+     const wcMatch = document.body.textContent.match(/当前字数(\d+)/);
+     const actual = wcMatch ? parseInt(wcMatch[1]) : 0;
+     const source = sourceBody.length;  // 步骤 1 中提取的源文件正文字数
+     ```
+   - **判定标准：实际字数必须 ≥ 源文件正文字数。少一个字都不行。**
+   - 若实际字数 < 源文件正文字数，立即判定为截断事故，**必须重试步骤 6（重新粘贴）**，不得继续存草稿。
+   - 若连续 2 次粘贴实际字数仍 < 源文件正文字数，说明键盘粘贴路径可能也被干扰，应暂停并人工介入。
+
+7. **必须确保正文来自你指定的章节文件，不得错章串章。**
+
+> **附录：事故核验清单**
+> - 实际字数是否 ≥ 源文件正文字数？（少一个字都不行）
+> - 编辑器内是否能看到大段连续正文（而非仅前几段）？
+> - 编辑器内是否包含"#第"行或"## 作者有话说"残留？
+> - 字数计数器是否为零（编辑器可能未获取焦点，需重激活后重试）？
+
+### 步骤 7：添加作者有话说（Quill 编辑器——同样禁用 `fill()`）
+
+- 作者有话说直接在章节编辑页面出现，无需点击按钮。
+- **输入前必须全选清空旧内容**（`Control+A` → `Delete`），再粘贴本章"作者有话说"内容。
+- 粘贴方式同步骤 6：先将内容复制到剪贴板，聚焦编辑器后 `Control+V`，避免 `fill()` 造成截断。
+- 输入后必须检查计数器（常见 `X/300`）：
   - 若超限，按“保钩子优先”压缩到平台限制内再保存。
   - 若未超限，保持原文语义并保存。
 
@@ -328,6 +388,8 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于“七猫小说/”�
 
 - 必须只上传用户明确指定的章节，不得擅自扩展范围。
 - 步骤 2 必须使用**新标签页**进入作者后台，禁止占用用户正在使用的原标签页。
+- **步骤 6（正文输入）必须使用系统剪贴板 + Ctrl+V 方式，绝对禁止使用 `fill()`、`innerHTML`、`appendChild` 等 DOM 直写操作**（详见步骤 6 与实操复盘章节）。
+- **正文粘贴后必须验证字数**：实际字数 < 源文件正文字数 即为截断事故，少一个字都不行，必须重贴。
 - 每章进入步骤 3 前，必须先查询 `七猫小说/分发记录.md`。
 - 新建与修改章节的 URL 必须按记录自动分流，禁止混用。
 - 每章“存为草稿”成功后，必须把最新 `章节Id` 回写到 `七猫小说/分发记录.md`。
@@ -374,7 +436,65 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于“七猫小说/”�
    1. 本地章节标题与 `分发记录.md` 章名 `mismatch=0`；
    2. 本地标题超长统计 `>20` 为 `0`；
    3. 草稿箱目标章可见且标题前缀命中。
+### 25章批量实战复盘·七猫新版编辑器Quill（2026-06-20）——正文截断事故深度复盘
 
+> **事故定性**：使用 `fill()` / `innerHTML` / `appendChild` 操作 `.q-contenteditable.book`（Quill 富文本编辑器）会导致编辑器悄无声息地丢弃 40–70% 的正文内容，且无任何错误提示。涉及 25 章中至少 12 章被截断，部分章节仅剩 30%。
+
+#### 根因分析
+
+- 七猫后台的正文编辑器基于 **Quill.js** 框架，它维护内部 Delta 模型来追踪内容。
+- `fill()`（Playwright 的模拟输入）和 `innerHTML`（DOM 直写）都**绕过 Quill 的 Delta 管道**，编辑器无法正确解析这些外部变更，造成内容丢失。
+- 同样的问题存在于 **`fill()` 方法在 Playwright Chromium 中**——它会逐个字符模拟输入，但对长文本 Quill 会频繁触发自身保护机制导致截断。
+
+#### 唯一正确方法：系统剪贴板 → Ctrl+V
+
+```javascript
+// 正确姿势
+await page.locator('.q-contenteditable.book').first().click();
+await page.waitForTimeout(200);
+await page.keyboard.press('Control+a');
+await page.keyboard.press('Delete');
+await page.waitForTimeout(200);
+await page.keyboard.press('Control+v');
+await page.waitForTimeout(3000);  // 关键：给 Quill 处理时间
+```
+
+注意 `navigator.clipboard.writeText()` 在 Playwright 中需在浏览器上下文启用剪贴板权限，推荐用 PowerShell `Set-Clipboard` 替代更稳定。
+
+#### 字数校验：粘贴后必须检查（少一个字都不行）
+
+- 粘贴并清理后立即读取 `document.body.textContent.match(/当前字数(\d+)/)`，并与步骤 1 中提取的源文件正文字数比较。
+- **判定标准：实际字数必须 ≥ 源文件正文字数。少一个字都不行。**
+- 若实际字数 < 源文件正文字数，立即判定为截断事故，必须重新粘贴，不得保存。
+- 粘贴后建议滚动编辑器确认正文完整（Playwright 可检查段落数是否与源文件一致）。
+
+#### 粘贴后清理的必须性
+
+Ctrl+V 会将源 `.md` 文件的全部内容（包括 `#第N章` 头行和 `##作者有话说`/`##章节后记` 尾部）都带入编辑器。必须在粘贴后用 DOM 操作删除这些元数据行，再触发 `input` 事件让字数统计同步。
+
+#### 连续批量的提效技巧
+
+- 先用 PowerShell 将各章正文循环写入剪贴板（逐一处理，避免串章）。
+- 每章之间的衔接：保存后回到草稿箱 → 点"新建草稿" → 填标题 → 聚焦编辑器 → 全选清空 → 粘贴（此时剪贴板已是下一章的正文）。
+- 作者有话说编辑器（`.q-contenteditable.font-size-14`）也是 Quill 实例，同样推荐用键盘粘贴而非 `fill()`。
+- 章回写分发记录时若无 `cid`，可保存后去草稿箱点该行的"修改"，从跳转 URL 提取 `cid` 参数。
+
+#### 截断事故快速自检
+
+| 检查项 | 正常 | 截断 |
+|--------|------|------|
+| 字数占比 | 实际字数 ≥ 源文字数 | 实际字数 < 源文字数 |
+| 首段内容 | 正文第一段 | 标题行或乱序 |
+| 编辑框滚动 | 可滚动看到完整正文 | 只有前几段 |
+| 段落数 | ≈ 源文段落数 | 远少于源文 |
+
+#### 禁止事项（硬规则）
+
+- ❌ **NEVER** 使用 `fill()` 对 `.q-contenteditable.book` 写入正文
+- ❌ **NEVER** 使用 `innerHTML` / `outerHTML` / `insertAdjacentHTML` 注入正文
+- ❌ **NEVER** 使用 `appendChild` / `insertBefore` 逐个添加文本节点
+- ❌ **NEVER** 在未验证字数的情况下就点击"存为草稿"
+- ✅ **唯一允许**：剪贴板 + Ctrl+V + 字数验证
 ## 完成检查清单
 
 - 已读取 `七猫小说/readme.md` 或 `七猫小说/README` 并提取必需字段。

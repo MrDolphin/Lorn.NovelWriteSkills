@@ -48,7 +48,7 @@ argument-hint: '给我 OUTLINE_FILE 与 CHAPTER_FILE；若是多章，可给 CHA
 以下任一情况都不等于流程完成，必须继续执行：
 
 1. **禁止把"初稿已写入"当作"章节已完成"** — 只完成步骤 1→2 时最多只能记为 drafted。
-2. **禁止跳过步骤 2 后的字数门禁** — 正文修改后都必须重跑 count-chapter.ps1，以最新 MeetsMinCJK 字段为准。
+2. **禁止跳过步骤 2 后的字数门禁** — 正文修改后都必须重跑 count-chapter.ps1，以最新 MeetsMinCJK/WithinRange 字段为准。**正文字数检测必须使用 `scripts/count-chapter.ps1`**，不得用 `Len`、`NoWhitespaceLen`、编辑器字符数或目测代替；正文门禁只看 `BodyCJK / MeetsMinCJK / WithinRange`，`MeetsMinCJK` 必须为 `True`，`WithinRange` 最好为 `True`。
 3. **禁止跳过润色与去AI味（步骤 3→4）直接进审阅** — 初稿必须经过润色和去AI味处理才能进入审阅。
 4. **步骤 6→7→8→9→9.5 的首轮闭环必须无条件执行** — 不得根据任何"综合评分"决定跳过、合并或提前终止。
 5. **禁止用"文件已存在"代替"步骤已执行"** — 必须以本次执行中是否实际读取、修改、覆盖写回并更新日志为准。
@@ -193,10 +193,10 @@ argument-hint: '给我 OUTLINE_FILE 与 CHAPTER_FILE；若是多章，可给 CHA
 | 2.1 | 加载通用-创建小说正文（及题材包装层），代入作者角色 |
 | 2.2 | 依据控制卡 + 大纲 + 人物传记 + 故事设定，创作完整章节正文（含章引语、正文、章末钩子、## 作者有话说、## 章节后记） |
 | 2.3 | 完整正文**覆盖写入** CHAPTER_FILE |
-| 2.4 | 运行 scripts/count-chapter.ps1 -FilePath "CHAPTER_FILE"，读取 JSON 输出中的 Len/CJK/BodyCJK/MeetsMinCJK/WithinRange |
+| 2.4 | 运行 scripts/count-chapter.ps1 -FilePath "CHAPTER_FILE"，读取 JSON 输出中的 BodyCJK/MeetsMinCJK/WithinRange（**正文字数检测必须使用 count-chapter.ps1**，不得用 Len、NoWhitespaceLen、编辑器字符数或目测代替；正文门禁只看 BodyCJK/MeetsMinCJK/WithinRange，MeetsMinCJK 必须为 True，WithinRange 最好为 True） |
 | 2.5 | **判断**：若 MeetsMinCJK == true → 进入步骤 3；若 MeetsMinCJK == false → 调用通用-创建小说正文（扩写模式），循环直至达标 |
 | 2.6 | **节拍门禁**：落稿后执行四拍复核（前200字钩子、中段回报、后200字钩子、连续内倾段检查），见 references/步骤2正文四拍与钩子轮换门禁.md |
-| 2.7 | **初稿后补检包**：①基础复检4项（重跑 count-chapter.ps1 字数门禁；若含 ## 作者有话说 则重跑 count-afterword.ps1；扫读是否混入"初稿+二稿"拼接式内容；同步刷新审阅链）；②章节自指检查（清除"这几章/前几章/上一章/本章/后文会"等连载导览腔）；③## 章节后记同步（刷新定位/爽点/伏笔回收/人物发展等字段） |
+| 2.7 | **初稿后补检包**：①基础复检4项（重跑 count-chapter.ps1 字数门禁——**正文字数检测必须使用 `scripts/count-chapter.ps1`**，不得用 `Len`、`NoWhitespaceLen`、编辑器字符数或目测代替，正文门禁只看 `BodyCJK / MeetsMinCJK / WithinRange`，`MeetsMinCJK` 必须为 `True`，`WithinRange` 最好为 `True`；若含 `## 作者有话说` 则重跑 `count-afterword.ps1`；扫读是否混入"初稿+二稿"拼接式内容；同步刷新审阅链）；②章节自指检查（清除"这几章/前几章/上一章/本章/后文会"等连载导览腔）；③## 章节后记同步（刷新定位/爽点/伏笔回收/人物发展等字段） |
 
 **文件写入：** 每轮扩写后覆盖写入 CHAPTER_FILE
 

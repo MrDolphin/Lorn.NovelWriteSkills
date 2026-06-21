@@ -216,7 +216,7 @@ argument-hint: '要把哪一章输出为今日头条版？默认按"开篇钩子
 - 标题长度限制不代表越短越好；今日头条应优先保证强钩子与讨论点密度，在不超限前提下尽量提升信息抓力。
 - 章节派生正文必须以 `.md` 文件形式落盘：若对应章节目录不存在，执行前必须先创建完整目录路径，再将改写后的章节内容写入该目录下的 `.md` 文件，不得只输出聊天稿而不写入文件。
 - 落盘路径的完整推断优先级：① 用户显式指定 chapterPath → ② 从源文件名与分部/卷信息自动推断 → ③ 若无法确定分部/卷，暂停并向用户确认，不得乱推断后静默落盘。
-- 平台稿落盘后必须显式运行字数门禁：以本 Skill 的"平台默认字数范围"或项目 `Agents.md` 覆盖值为准，用 `scripts/count-chapter.ps1` 核正文，用 `scripts/count-afterword.ps1` 核 `## 作者有话说`。
+- 平台稿落盘后必须显式运行字数门禁：**正文字数检测必须使用 `scripts/count-chapter.ps1`**，不得用 `Len`、`NoWhitespaceLen`、编辑器字符数或目测代替。字数参数以本 Skill 的"平台默认字数范围"或项目 `Agents.md` 覆盖值为准，用 `scripts/count-chapter.ps1` 校验正文；正文门禁只看 `BodyCJK / MeetsMinCJK / WithinRange`，`MeetsMinCJK` 必须为 `True`，`WithinRange` 最好为 `True`。`## 作者有话说` 用 `scripts/count-afterword.ps1` 单独校验。
 - 生成阶段建议先达到字数保底目标再允许落盘：以本 Skill 的"平台默认字数范围"或项目 `Agents.md` 覆盖值为准。
 - 在无损迁移完成前，不得删除源 `输出今日头条版.prompt.md` 中尚未完成映射的内容。
 

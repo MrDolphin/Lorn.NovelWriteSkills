@@ -394,8 +394,8 @@ argument-hint: '要写哪一章？已有章纲、人物档案、设定文档和�
 	11. 模板腔、假人声或机械表达明显时，再调用：`通用-去AI味重写`，并先做一句病灶诊断，再锁定三档手术强度。
 
 - 阶段 D：最小复检清单
-	12. 落稿后必须完成一组字数复检：字数参数按以下优先级确定：① 项目 `Agents.md` 中主输出平台指定 → ② 主输出平台对应 `通用-输出*版/SKILL.md` 的"平台默认字数范围" → ③ 通用回退值（中文正文 2500–5000 CJK，作者有话说 150–300 CJK）。正文运行 `scripts/count-chapter.ps1`（参数取上述来源）；`## 作者有话说` 运行 `scripts/count-afterword.ps1`（参数取上述来源）。
-	13. 正文字数门禁只认 `count-chapter.ps1` 输出中的 `BodyCJK`、`MeetsMinCJK` 与 `WithinRange`；`Len` 仅作参考。
+	12. 落稿后必须完成一组字数复检：**正文字数检测必须使用 `scripts/count-chapter.ps1`**，不得用 `Len`、`NoWhitespaceLen`、编辑器字符数或目测代替。字数参数按以下优先级确定：① 项目 `Agents.md` 中主输出平台指定 → ② 主输出平台对应 `通用-输出*版/SKILL.md` 的"平台默认字数范围" → ③ 通用回退值（中文正文 2500–5000 CJK，作者有话说 150–300 CJK）。正文门禁只看 `BodyCJK / MeetsMinCJK / WithinRange`，`MeetsMinCJK` 必须为 `True`，`WithinRange` 最好为 `True`。`## 作者有话说` 用 `scripts/count-afterword.ps1` 单独校验。
+	13. 正文字数门禁只看 `count-chapter.ps1` 输出中的 `BodyCJK / MeetsMinCJK / WithinRange`，`MeetsMinCJK` 必须为 `True`，`WithinRange` 最好为 `True`；`Len` 仅作参考。
 	14. `去空白统计`、`NoWhitespaceLen`、手工目测或任何自定义字符数，都不得替代脚本门禁字段。
 	15. 若首轮落稿明显低于门槛，默认优先回到控制卡与场景职责补足“动作链 / 回报位 / 升级后果 / 章末钩子”，而不是用解释性段落做机械补字。
 
@@ -670,7 +670,7 @@ argument-hint: '要写哪一章？已有章纲、人物档案、设定文档和�
 - 章末驱动必须靠新变量、新后果、未完成动作或具体危险来成立，不得用“下一章……”之类预告句替代钩子。
 - 不得把人物写成只有高光、没有短板；重要角色至少要让读者看见他在能力、情绪、关系或选择上的真实阻力。
 - 章节正文文件名默认不带日期；若新建文件，仍必须服从上文的 `小说正文/` 工作目录与章节层级规则；`## 作者有话说` 与 `## 章节后记` 作为同一正文文件的组成部分，也不得额外改成日期版文件名，除非用户明确要求另存归档副本。
-- 交付前不得只凭目测判断篇幅是否达标；必须显式运行字数门禁：字数参数按以下优先级确定：① 项目 `Agents.md` 中主输出平台指定 → ② 主输出平台对应 `通用-输出*版/SKILL.md` 的"平台默认字数范围" → ③ 通用回退值（中文正文 2500–5000 CJK）。用 `scripts/count-chapter.ps1`（参数取上述来源）校验正文，并用 `scripts/count-afterword.ps1`（参数取上述来源）校验 `## 作者有话说`。
+- 交付前不得只凭目测判断篇幅是否达标；**正文字数检测必须使用 `scripts/count-chapter.ps1`**，不得用 `Len`、`NoWhitespaceLen`、编辑器字符数或目测代替。字数参数按以下优先级确定：① 项目 `Agents.md` 中主输出平台指定 → ② 主输出平台对应 `通用-输出*版/SKILL.md` 的"平台默认字数范围" → ③ 通用回退值（中文正文 2500–5000 CJK）。正文门禁只看 `BodyCJK / MeetsMinCJK / WithinRange`，`MeetsMinCJK` 必须为 `True`，`WithinRange` 最好为 `True`。`## 作者有话说` 用 `scripts/count-afterword.ps1` 单独校验。
 - 若需要在后记、日志、摘要或审阅报告中记录篇幅数据，必须直接引用脚本输出字段 `Len / CJK / BodyCJK / MeetsMinCJK / WithinRange / MeetsAll`；不得改写成“正文字数：XXXX（去空白统计）”之类的替代口径。
 - Prompt 可以变薄，但执行时不得因为 Prompt 变薄而漏读本 Skill 及其 references。
 - 若项目或题材层另有更严格的时间、编号、平台、视角或格式约束，必须继续服从题材层。

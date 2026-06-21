@@ -28,6 +28,8 @@ argument-hint: '要润哪一章、哪一场景或哪几段？默认按“已有�
 ### 最终验收用
 
 - `references/正文润色检查清单.md` — 全过程逐步检查，最终放行前逐项复查
+- `references/系统性修文三要素复盘法.md`（**新增** — 社区验证的修文前诊断框架：人物复盘→情节复盘→环境复盘，可作为润色前置步骤）
+- `references/关键剧情识别与详略诊断.md`（**新增** — 社区验证的关键剧情删除测试法：删掉某段剧情看矛盾链是否仍成立；含详略得当诊断框架与简化不必要描写清单）
 - `references/润色后链路职责保真复核卡.md` — 确认卖点/回报/钩子/场景职责未润平，在步骤 6 句级精修前复查
 
 ### 句级精修与通用技法
@@ -139,9 +141,7 @@ argument-hint: '要润哪一章、哪一场景或哪几段？默认按“已有�
    - 节奏手感与简洁度需增强 → 按需读 `references/腾讯专栏行文手感与简洁节奏增补.md`
    - 画面感需强化 → 按需读 `references/画面感强化技法.md`（参见上方"画面感强化专项"节）
    - 沉浸效果与读者情绪体验 → 按需读 `references/正文润色增强技法与读者机制.md` 的"读者机制提醒"与"红线"节
-7. **字数门禁**：若本轮改动影响正文篇幅，回写前必须重跑字数门禁。字数参数按以下优先级确定：① 项目 `Agents.md` 中主输出平台指定 → ② 主输出平台对应 `通用-输出*版/SKILL.md` 的"平台默认字数范围" → ③ 通用回退值（中文正文 2500–5000 CJK）。用 `scripts/count-chapter.ps1`（参数取上述来源）；若本次连同 `## 作者有话说` 一并处理，再补跑 `scripts/count-afterword.ps1`（参数取上述来源）。
-	- 正文门禁只看脚本输出的 `BodyCJK / MeetsMinCJK / WithinRange`；`Len` 只作参考。
-	- 不得用“去空白统计”“NoWhitespaceLen”或编辑器字符数代替 `BodyCJK`。
+7. **字数门禁（强制）**：回写前必须重跑字数门禁。**正文字数检测必须使用 `scripts/count-chapter.ps1`**，不得用 `Len`、`NoWhitespaceLen`、编辑器字符数或目测代替。字数参数按以下优先级确定：① 项目 `Agents.md` 中主输出平台指定 → ② 主输出平台对应 `通用-输出*版/SKILL.md` 的"平台默认字数范围" → ③ 通用回退值（中文正文 2500–5000 CJK）。用 `scripts/count-chapter.ps1 -Path "CHAPTER_FILE"`（参数取上述来源）；正文门禁只看 `BodyCJK / MeetsMinCJK / WithinRange`，`MeetsMinCJK` 必须为 `True`，`WithinRange` 最好为 `True`。若本次连同 `## 作者有话说` 一并处理，再补跑 `scripts/count-afterword.ps1`（参数取上述来源）。
 
 ## 本轮精修新增关注点（新增）
 

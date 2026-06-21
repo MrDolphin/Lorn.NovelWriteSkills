@@ -20,12 +20,12 @@ argument-hint: '要创建或修改哪组总纲层文件？默认按总纲包理�
 
 命中总纲层任务时，除本文件外，**必须继续读取**：
 
- - `references/腾讯专栏写作两层级增补.md`
-	- `references/腾讯专栏主角代入感与生活化开局增补.md`
-	- `references/腾讯专栏写作两级框架与大纲细纲增补.md`
-	- `references/腾讯专栏素材转危机设定与现实题材避免悬浮增补.md`
- - `references/腾讯专栏素材转危机设定与现实题材避免悬浮增补.md`
- - `references/腾讯专栏大纲前中后规划法与能力线增补.md`
+- `references/腾讯专栏写作两层级增补.md`
+- `references/腾讯专栏主角代入感与生活化开局增补.md`
+- `references/腾讯专栏写作两级框架与大纲细纲增补.md`
+- `references/腾讯专栏素材转危机设定与现实题材避免悬浮增补.md`
+- `references/腾讯专栏大纲前中后规划法与能力线增补.md`
+- `references/三卷万能骨架模板.md`
 - `references/模板化大纲_节奏地图_决策日志补编.md`
 
 ## 风格/蓝本/写作研究模板自动发现规则

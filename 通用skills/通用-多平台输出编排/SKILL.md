@@ -212,7 +212,7 @@ argument-hint: '请给我一个 chapterPath 或 chapterPaths；platforms 可以�
 
 | 步骤 | 动作 | 调用 skill / 脚本 | 完成标记 |
 |------|------|------------------|---------|
-| 10 | 每个平台版本进入**平台内门禁**：先过字数门禁（count-chapter.ps1 / count-afterword.ps1），再过 POV 门禁（pov_validate.py / run_pov_gate.ps1）。任一失败立刻回炉 | count-chapter.ps1、count-afterword.ps1、pov_validate.py | 各平台字数/POV 门禁已过关 |
+| 10 | 每个平台版本进入**平台内门禁**：先过字数门禁（**必须使用 count-chapter.ps1**，不得用 Len/NoWhitespaceLen/编辑器字符数或目测代替，正文门禁只看 BodyCJK/MeetsMinCJK/WithinRange，MeetsMinCJK 必须为 True，WithinRange 最好为 True），再过 POV 门禁（pov_validate.py / run_pov_gate.ps1）。任一失败立刻回炉 | count-chapter.ps1、count-afterword.ps1、pov_validate.py | 各平台字数/POV 门禁已过关 |
 | 11 | 所有目标平台通过平台内门禁后，统一进入**分语言相似度终检**：中文组内两两+中文各平台对源章阈值<0.20；英文组内两两阈值<0.20 | chapter_similarity_check.ps1 / run_similarity_from_platform_config.ps1 | 相似度终检：中文组 {pass/fail}，英文组 {pass/fail} |
 | 12 | 任意平台在字数/POV/相似度中失败 → 进入该平台自己的回炉循环，**不得扩大**。回炉顺序固定：字数门禁 → POV 门禁 → 相似度门禁 | 回炉时回到对应步骤的修改链路 | 该平台回炉中：{项} |
 | 13 | 每次相似度回炉后显式运行质量门禁（run_quality_gate.ps1 / scan_text_quality.ps1）。**禁止插入无意义字符或模板噪声压相似度** | run_quality_gate.ps1、scan_text_quality.ps1 | 质量门禁已通过 |

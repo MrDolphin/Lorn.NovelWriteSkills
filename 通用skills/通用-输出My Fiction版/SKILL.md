@@ -177,7 +177,7 @@ argument-hint: '要把哪一章输出为 My Fiction 版？默认按“保留核�
 - 平台派生正文文件名默认不带日期，沿用既有章节号与平台标题同步规则；日期只用于配套审阅报告、书评等派生产物。
 - 章节派生正文必须以 `.md` 文件形式落盘：若对应章节目录不存在，执行前必须先创建完整目录路径，再将改写后的章节内容写入该目录下的 `.md` 文件，不得只输出聊天稿而不写入文件。
 - 落盘路径的完整推断优先级：① 用户显式指定 chapterPath → ② 从源文件名与分部/卷信息自动推断 → ③ 若无法确定分部/卷，暂停并向用户确认，不得乱推断后静默落盘。
-- 平台稿落盘后必须显式运行字数门禁脚本：参数按以下优先级确定：① 项目 `Agents.md` 中该平台指定 → ② 本 Skill 的"平台默认字数范围"。正文门禁用 `scripts/platform_validate.ps1` 以对应字数参数校验整稿；若只单独核 `## 作者有话说`，用 `scripts/count-afterword-words.ps1`（参数取对应作者有话说范围）；除 `## 作者有话说` 标记行外，还必须用 `scripts/check_no_cjk_except_marker.ps1` 校验零中文 / CJK。
+- 平台稿落盘后必须显式运行字数门禁脚本：**检测正文字数必须使用 `scripts/count-chapter.ps1`**，不得用 `Len`、`NoWhitespaceLen` 或编辑器字符数代替。字数参数按以下优先级确定：① 项目 `Agents.md` 中该平台指定 → ② 本 Skill 的"平台默认字数范围"。正文门禁用 `scripts/count-chapter.ps1 -Path "FILE"` 校验（英文稿重点关注 `Len` 字段作为总字符参考，`BodyCJK` 用于零中文排查）；此外用 `scripts/platform_validate.ps1` 以对应字数参数校验整稿；若只单独核 `## 作者有话说`，用 `scripts/count-afterword-words.ps1`（参数取对应作者有话说范围）；除 `## 作者有话说` 标记行外，还必须用 `scripts/check_no_cjk_except_marker.ps1` 校验零中文 / CJK。
 - 生成阶段建议先达到字数目标再允许落盘：以本 Skill 的"平台默认字数范围"或项目 `Agents.md` 覆盖值为准。
 - 在无损迁移完成前，不得删除源 `输出My Fiction版.prompt.md` 中尚未完成映射的内容。
 
