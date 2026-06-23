@@ -38,6 +38,7 @@ argument-hint: '要处理哪个微空间或受限场景？默认先走 通用-�
 - `通用-执行场景单元/references/场景去模板腔清单.md`
 - `references/微空间受限场景保真规则.md`
 - `references/微空间场景施工卡模板.md`
+- `../../写作研究/网文留存模型.md` — 留存基线，定义微空间场景的"读者紧张感留存力"自检——每步升级是否驱动读者"想知道下一步"
 - `references/微空间场景模式.md`
 - `references/微空间执行检查表.md`
 - `references/微反常升级梯子.md`

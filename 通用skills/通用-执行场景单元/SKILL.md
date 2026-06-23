@@ -17,6 +17,7 @@ argument-hint: '要处理哪一章或哪个场景单元？默认先搭场景目�
 - `references/场景单元施工卡模板.md`
 - `references/单场施工卡_承重beat与状态变化模板.md`
 - `references/对话场景子模板_声音差_潜台词_升级阶梯.md`
+- `../../写作研究/网文留存模型.md` — 留存基线，定义场景的"留存职责"字段——场景负责续读驱动/回报兑现/情绪铺垫中的哪一种
 - `references/场景存在理由判断.md`
 - `references/场景最小起伏公式.md`
 - `references/场景动作后果速配表.md`

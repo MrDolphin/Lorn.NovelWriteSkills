@@ -125,6 +125,8 @@ argument-hint: '请给我一个 chapterPath 或 chapterPaths；platforms 可以�
 - `references/多平台输出执行总流程与断点恢复.md`
 - `references/多平台输出门禁与相似度规则.md`
 - `references/多平台输出摘要与日志规范.md`
+- `../../写作研究/网文留存模型.md` — 留存基线
+- `../../写作研究/GEO小说项目核心参考.md`（**新增** — GEO 基础框架，支撑步骤 10-14 门禁中新增的 GEO 门禁），定义多平台分发阶段的留存门禁与平台留存策略映射
 
 ## 题材包装层路由规则
 
@@ -227,7 +229,7 @@ argument-hint: '请给我一个 chapterPath 或 chapterPaths；platforms 可以�
 | 10 | **平台内门禁**：①先过字数门禁（**必须使用 count-chapter.ps1**，不得用 Len/NoWhitespaceLen/编辑器字符数或目测代替，正文门禁只看 BodyCJK/MeetsMinCJK/WithinRange，MeetsMinCJK 必须为 True，WithinRange 最好为 True）。字数通过后②再过 POV 门禁（pov_validate.py / run_pov_gate.ps1）。**字数门禁未通过不得进入 POV 门禁** | count-chapter.ps1、count-afterword.ps1、pov_validate.py | 字数门禁 BodyCJK/MeetsMinCJK 实测过关 + POV 门禁实测过关 |
 | 11 | 所有目标平台通过平台内门禁后，统一进入**分语言相似度终检**：中文组内两两+中文各平台对源章阈值<0.20；英文组内两两阈值<0.20。**相似度终检未通过不得进入步骤 13** | chapter_similarity_check.ps1 / run_similarity_from_platform_config.ps1 | 中文组 {pass} + 英文组 {pass} |
 | 12 | **回炉闸口**：步骤 10/11/13 中任一失败 → **必须**进入该平台自己的回炉循环，**不得扩大**到其他平台。回炉顺序固定：字数门禁 → POV 门禁 → 相似度门禁 → 质量门禁。**回炉后再顺序重测步骤 10→11→13** | 回炉时回到对应步骤的修改链路 | 该平台已执行回炉修改 |
-| 13 | 每次相似度回炉后显式运行质量门禁（run_quality_gate.ps1 / scan_text_quality.ps1）。**禁止插入无意义字符或模板噪声压相似度**。**质量门禁未通过不得进入步骤 14** | run_quality_gate.ps1、scan_text_quality.ps1 | 质量门禁已通过 |
+| 13 | 每次相似度回炉后显式运行质量门禁（run_quality_gate.ps1 / scan_text_quality.ps1）。**禁止插入无意义字符或模板噪声压相似度**。**质量门禁未通过不得进入步骤 14**。<br>**留存门禁（新增）**：质量门禁通过后，增加留存风险自检。每个平台版本的正文检查"情绪刺激密度是否因改写而降低"——若改写后连续 300 字无情绪刺激，标记为该平台的留存风险，回炉到对应通用-输出{平台名}版重新改写。<br>**GEO 门禁（新增）**：留存门禁通过后，可选增加 GEO 自检——检查平台版正文是否包含 AI 可引用的结构化元数据（检查项：① 是否含作品信息块 ② 是否含平台标签 ③ 是否含发布年份标签）。此为可选门禁，不影响主流程完成，但若启用则标记 `[GEO门禁已执行]`。详见 `../../写作研究/GEO小说项目核心参考.md`。 | run_quality_gate.ps1、scan_text_quality.ps1 | 质量门禁已通过 + 留存风险自检通过 |
 | 14 | **终判闸口**：若回炉降相似度后又导致字数/POV/质量任一门禁失效 → **必须**继续回到该平台分支回炉（步骤 12），直到四者同时达标。**四者未同时达标不得宣告该平台完成** | 循环执行步骤 10–13 对应子集 | 字数+POV+相似度+质量全达标 |
 
 ### 阶段 E：完成判定（步骤 15）—— 强制调用完整性 + IF/THEN 收口闸门
