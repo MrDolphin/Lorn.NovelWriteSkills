@@ -2,6 +2,7 @@
 name: 分发-My Fiction
 description: 用于将 `My Fiction/` 目录内指定章节批量上传到 My Fiction 作者后台并保存。支持按 `My Fiction/README.md` 读取账号、密码、书籍Id、书名与书籍信息校验，自动进入新建/修改章节页，填写单一章节标题输入框，录入正文与作者有话说，保存后循环处理下一章。关键词：My Fiction 上传、作者后台、章节保存、批量传章、作者有话说、英文平台。
 argument-hint: 给我 chapterPath 或 chapterPaths（位于 `My Fiction/` 目录），我会按 `My Fiction/README.md` 的账号与书籍信息逐章上传并保存，同时在需要登录时暂停等待你手动完成登录。
+user-invocable: true
 ---
 
 # 上传指定章节到 My Fiction 并保存

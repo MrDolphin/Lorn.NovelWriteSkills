@@ -2,6 +2,7 @@
 name: AI科幻-输出GoodNovel版
 description: '用于【AI科幻】题材下的 GoodNovel 平台输出任务。作为题材包装层、兼容入口与路由层，负责保留AI科幻入口、补充关系张力与现实调查边界，并明确要求优先强制加载并使用 `通用-输出GoodNovel版`。关键词：AI科幻GoodNovel版、英文平台、关系张力、调查悬疑。'
 argument-hint: '要把哪一章AI科幻改成 GoodNovel 版？默认按“保调查压力、人物拉扯与英文情绪张力”处理。'
+user-invocable: false
 ---
 
 # AI科幻-输出GoodNovel版

@@ -2,6 +2,7 @@
 name: 异能志怪-输出WebNovel版
 description: '用于【异能志怪】题材下的 WebNovel 平台输出任务。作为题材包装层、兼容入口与路由层，负责保留异能志怪入口、补充规则机制与跨文化可读边界，并明确要求优先强制加载并使用 `通用-输出WebNovel版`。关键词：异能志怪WebNovel版、英文连载、民俗规则、跨文化改写。'
 argument-hint: '例如：把异能志怪某章改成更适合 WebNovel 的英文版本，并保留规则链与代价感。'
+user-invocable: false
 ---
 
 # 异能志怪-输出WebNovel版

@@ -2,6 +2,7 @@
 name: AI科幻-输出My Fiction版
 description: '用于【AI科幻】题材下的 My Fiction 平台输出任务。作为题材包装层、兼容入口与路由层，负责保留AI科幻入口、补充关系黏性与调查驱动边界，并明确要求优先强制加载并使用 `通用-输出My Fiction版`。关键词：AI科幻My Fiction版、英文追更、关系张力。'
 argument-hint: '要把哪一章AI科幻改成 My Fiction 版？默认按“保系统危机推进、关系拉力与英文追更感”处理。'
+user-invocable: false
 ---
 
 # AI科幻-输出My Fiction版

@@ -1,6 +1,7 @@
 ---
 name: vibe-writing
 description: Vibe Writing 写作系统，用于创建高质量、低AI检测率的中文文章。适用于公众号文章、博客、Newsletter等内容写作，也可用于修改已有文章降低AI味，或审校内容质量。包含三遍审校机制、降AI味技巧和口语化写作指南。
+user-invocable: false
 ---
 
 # Vibe Writing 写作系统

@@ -2,6 +2,7 @@
 name: 通用-输出WebNovel版
 description: '用于把小说章节改写为更适合 WebNovel 平台的英文版本。适合强调跨文化可读性、移动端阅读节奏、清晰因果链与全球年轻读者易读性的正文输出；供多个题材的 `题材名-输出WebNovel版` 包装层路由使用。关键词：输出WebNovel版、WebNovel、英文平台、跨文化改写。'
 argument-hint: '要把哪一章输出为 WebNovel 版？默认按“保留核心信息 + 跨文化可读性强化 + 直接按平台骨架改写”处理。'
+user-invocable: false
 ---
 
 # 通用-输出WebNovel版

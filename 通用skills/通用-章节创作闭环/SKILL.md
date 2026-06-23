@@ -2,6 +2,7 @@
 name: 通用-章节创作闭环
 description: '用于对单章或连续多章执行"初始化→控制卡→创作→润色→去AI味→审阅回炉→读者产物→摘要"的完整章节闭环。适合章节写作 SOP、批量写章、日志续跑、9.2+ 回炉与最终摘要收口。关键词：章节创作闭环、跑完整 SOP、批量写章、回炉到 9.2、日志续跑、最终摘要。'
 argument-hint: '给我 OUTLINE_FILE 与 CHAPTER_FILE；若是多章，可给 CHAPTER_FILES[] / CHAPTER_BATCH[]，默认直到评分达标再结束。'
+user-invocable: false
 ---
 
 # 通用-章节创作闭环

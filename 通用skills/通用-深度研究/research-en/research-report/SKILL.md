@@ -1,5 +1,5 @@
 ---
-user-invocable: true
+user-invocable: false
 description: Summarize deep research results into markdown report, cover all fields, skip uncertain values.
 allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
 ---
