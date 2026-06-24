@@ -2,7 +2,7 @@
 name: 撰写小说章节SOP
 description: '对单章或连续多章执行“创作→补字→润色→去AI味→审阅回炉→读者产物→摘要”的完整章节闭环；这是执行型 SOP，不是只产出计划或阶段汇报的规划型 Prompt，并默认路由到题材章节创作闭环 Skill。'
 argument-hint: '给我 OUTLINE_FILE 与 CHAPTER_FILE；若是连续多章，可给 CHAPTER_FILES[] / OUTLINE_FILES[] / CHAPTER_BATCH[] / BATCH_ID。'
-agent: Plan
+
 ---
 
 # 撰写小说章节 SOP
