@@ -11,8 +11,8 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 两题材 | frontmatter 与入口名 | frontmatter | 保留 WebNovel 入口名与触发词 | 薄 Prompt | 各自 Prompt | 对应题材 Skill | 部分 | 仍需 description 关键词严校 |
 | 两题材 | 迁移状态/当前状态说明 | 原地保留 | 当前非无损完成的过渡说明 | 原地保留 | 各自 Prompt | 总台账 | 是 | 已保留 |
-| 两题材 | 0.任务定义 | 任务定义 | 面向 WebNovel 的英文版本改写目标 | 通用 Skill | `通用skills/通用-输出WebNovel版/SKILL.md` | 通用详细回填 refs | 是 | 已回填 |
-| 两题材 | 0.1-0.3 | 继承关系/语言门禁 | 基准继承、零新增、沉浸式英文小说、零中文/CJK | references | `通用skills/通用-输出WebNovel版/references/分节级补救映射与详细规则回填.md` | SOP 英文平台门禁 | 是 | 已回填 |
+| 两题材 | 0.任务定义 | 任务定义 | 面向 WebNovel 的英文版本改写目标 | 通用 Skill | `CommonSkills/通用-输出WebNovel版/SKILL.md` | 通用详细回填 refs | 是 | 已回填 |
+| 两题材 | 0.1-0.3 | 继承关系/语言门禁 | 基准继承、零新增、沉浸式英文小说、零中文/CJK | references | `CommonSkills/通用-输出WebNovel版/references/分节级补救映射与详细规则回填.md` | SOP 英文平台门禁 | 是 | 已回填 |
 | 两题材 | 1.1 平台机制/输出语言 | 平台共性 | global English、跨文化可读性、hook-driven 节奏 | references | 同上 | `平台共性执行细则.md` | 是 | 已回填 |
 | 异能志怪 | 1.2 题材取舍 | 题材边界 | 规则机制、功能表达、文化特异性可读化 | 题材 Skill | `异能志怪/.github/skills/异能志怪-输出WebNovel版/references/分节级补救映射与详细规则回填.md` | 题材补丁 | 是 | 已回填 |
 | 都市悬疑 | 1.2 题材取舍 | 题材边界 | 调查链、公平推理、现实程序的国际化表达 | 题材 Skill | `都市悬疑/.github/skills/都市悬疑-输出WebNovel版/references/分节级补救映射与详细规则回填.md` | 题材补丁 | 是 | 已回填 |

@@ -1,17 +1,17 @@
 $skills = @(
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出新浪微博版\SKILL.md"; Platform="新浪微博"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出豆瓣版\SKILL.md"; Platform="豆瓣"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出知乎版\SKILL.md"; Platform="知乎"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出微信订阅号版\SKILL.md"; Platform="微信"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出出版社版\SKILL.md"; Platform="出版社"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出My Fiction版\SKILL.md"; Platform="My Fiction"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出GoodNovel版\SKILL.md"; Platform="GoodNovel"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出WebNovel版\SKILL.md"; Platform="WebNovel"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出纵横小说版\SKILL.md"; Platform="纵横"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出小红书版\SKILL.md"; Platform="小红书"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出今日头条版\SKILL.md"; Platform="今日头条"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出番茄版\SKILL.md"; Platform="番茄"},
-    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出起点中文网版\SKILL.md"; Platform="起点"}
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出新浪微博版\SKILL.md"; Platform="新浪微博"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出豆瓣版\SKILL.md"; Platform="豆瓣"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出知乎版\SKILL.md"; Platform="知乎"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出微信订阅号版\SKILL.md"; Platform="微信"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出出版社版\SKILL.md"; Platform="出版社"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出My Fiction版\SKILL.md"; Platform="My Fiction"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出GoodNovel版\SKILL.md"; Platform="GoodNovel"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出WebNovel版\SKILL.md"; Platform="WebNovel"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出纵横小说版\SKILL.md"; Platform="纵横"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出小红书版\SKILL.md"; Platform="小红书"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出今日头条版\SKILL.md"; Platform="今日头条"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出番茄版\SKILL.md"; Platform="番茄"},
+    @{File="d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出起点中文网版\SKILL.md"; Platform="起点"}
 )
 
 foreach ($s in $skills) {

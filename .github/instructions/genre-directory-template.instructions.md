@@ -1,5 +1,5 @@
 ---
-description: "Use when creating, expanding, reviewing, or reorganizing a genre directory, topic folder, 题材目录, 写作研究 folder, or new subject-specific writing assets in this repository. Covers top-level genre naming, default folder template, what belongs in genre folders, and how to avoid mixing genre assets with 通用skills, scripts, or 仅用于参考."
+description: "Use when creating, expanding, reviewing, or reorganizing a genre directory, topic folder, 题材目录, 写作研究 folder, or new subject-specific writing assets in this repository. Covers top-level genre naming, default folder template, what belongs in genre folders, and how to avoid mixing genre assets with CommonSkills, scripts, or 仅用于参考."
 name: "新增题材目录模板"
 ---
 
@@ -14,7 +14,7 @@ name: "新增题材目录模板"
 这个判断不是只在新建目录时做一次，而应在后续向题材目录中补 Prompt、Skill、Agent、instructions、模板或检查清单时持续重复执行。
 
 - 只要识别出新增内容里有一部分其实不专属于该题材，而是可跨题材复用的通用能力，就不应只留在题材目录内
-- 对于这类内容，应无论本次任务是否显式要求修改通用 Skill，都同步考虑将其提取并沉淀到 `通用skills/` 中对应能力的通用 Skill
+- 对于这类内容，应无论本次任务是否显式要求修改通用 Skill，都同步考虑将其提取并沉淀到 `CommonSkills/` 中对应能力的通用 Skill
 - 若对应通用 Skill 尚未存在，应优先补建通用 Skill，再让题材目录内资产回到题材入口、题材边界或题材包装层职责
 
 不要把以下内容误放到题材目录：
@@ -71,14 +71,14 @@ name: "新增题材目录模板"
 
 ## 与其它目录的边界
 
-- 与题材无关的可复用能力 → 放 `通用skills/`
+- 与题材无关的可复用能力 → 放 `CommonSkills/`
 - 与某个 Skill 无直接绑定的通用脚本 → 放 `scripts/`
 - 来自外部、且与具体题材无关的参考资料 → 放 `仅用于参考/`
 - 与某个题材强相关的内容 → 放对应题材目录
 
 补充要求：
 
-- 若你是在编写或修改题材目录内的 Skill、Prompt、局部 instructions 或其模板时，才识别出其中混入了题材无关的通用内容，也仍应把这部分内容回收到 `通用skills/`，而不是因为“当前正在处理题材目录”就继续留在题材层
+- 若你是在编写或修改题材目录内的 Skill、Prompt、局部 instructions 或其模板时，才识别出其中混入了题材无关的通用内容，也仍应把这部分内容回收到 `CommonSkills/`，而不是因为“当前正在处理题材目录”就继续留在题材层
 - 题材目录中的资产应优先承载题材专属边界、题材入口兼容性、题材补充规则与题材研究沉淀，不应长期寄存本应上收到通用层的共性本体
 
 ## 题材目录中的 Skill 命名规则
@@ -96,7 +96,7 @@ name: "新增题材目录模板"
 - 是否与现有题材目录重复或高度近义
 - 是否至少包含 `写作研究/` 与 `.github/`
 - `.github/` 下是否按需要包含 `prompts/`、`skills/`、`agents/`、`instructions/`
-- 是否把本该去 `通用skills/`、`scripts/`、`仅用于参考/` 的内容误放进来了
+- 是否把本该去 `CommonSkills/`、`scripts/`、`仅用于参考/` 的内容误放进来了
 - 若后续计划在该题材目录内补 Skill 或模板，是否已经预先考虑哪些部分其实应先沉淀为通用 Skill
 - 若创建题材 Skill，Skill 名称和目录名前缀是否正确
 
@@ -115,5 +115,5 @@ name: "新增题材目录模板"
 - 先建一套很大的空目录骨架，后面长期不用
 - 题材目录名使用英文或中英混搭
 - 把通用能力塞进题材目录
-- 明知新增内容已经是题材无关的共性规则，却因为本次只在改题材目录而不回收到 `通用skills/`
+- 明知新增内容已经是题材无关的共性规则，却因为本次只在改题材目录而不回收到 `CommonSkills/`
 - 为同一题材反复新建近义目录

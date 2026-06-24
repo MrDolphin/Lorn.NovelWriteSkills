@@ -16,7 +16,7 @@ $platforms = @{
 
 foreach ($k in $platforms.Keys) {
     $p = $platforms[$k]
-    $file = "d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\通用skills\通用-输出${k}版\SKILL.md"
+    $file = "d:\Users\lorns\OneDrive\第二职业\网文写作\提示词\CommonSkills\通用-输出${k}版\SKILL.md"
     if (-not (Test-Path $file)) {
         Write-Output "MISS: $k"
         continue

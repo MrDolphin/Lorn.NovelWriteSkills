@@ -2,7 +2,7 @@
 
 > 本文件为题材补充模板。主模板在：
 >
-> - `通用skills/通用-去AI味重写/references/去AI味多轮诊断与回写模板.md`
+> - `CommonSkills/通用-去AI味重写/references/去AI味多轮诊断与回写模板.md`
 
 ## 1. 异能志怪补写项
 

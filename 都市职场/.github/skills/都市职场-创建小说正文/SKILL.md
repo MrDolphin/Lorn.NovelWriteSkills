@@ -29,7 +29,7 @@ user-invocable: false
 
 - `references/题材正文创作补充规则.md`
 - `references/控制卡落正文与镜头化桥接.md`
-- `通用skills/通用-创建小说正文/references/章节附属构件与后记规范.md`（`
+- `CommonSkills/通用-创建小说正文/references/章节附属构件与后记规范.md`（`
 
 ## 作者有话说` 与 `
 

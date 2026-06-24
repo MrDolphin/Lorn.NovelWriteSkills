@@ -27,7 +27,7 @@
 这个项目更像一个**写作工作台**：
 
 1. **分层明确**
-   - `通用skills/`：沉淀跨题材复用的能力本体
+   - `CommonSkills/`：沉淀跨题材复用的能力本体
    - `题材目录/.github/skills/`：题材包装层、默认入口、题材边界
    - `题材目录/.github/prompts/`：题材任务入口、SOP、兼容入口
    - `scripts/`：写作期质检、相似度、格式化、平台门禁脚本
@@ -172,7 +172,7 @@
 
 ```text
 .
-├─ 通用skills/              # 跨题材稳定复用的通用 Skill 能力本体
+├─ CommonSkills/              # 跨题材稳定复用的通用 Skill 能力本体
 ├─ scripts/                 # 写作期维护、门禁、格式化、相似度与质检脚本
 ├─ 都市悬疑/                # 题材目录：研究、Prompt、Skill、Instructions
 ├─ 异能志怪/
@@ -226,7 +226,7 @@
 
 如果你第一次接触这个仓库，推荐按这个顺序看：
 
-1. 先看 `通用skills/README.md`
+1. 先看 `CommonSkills/README.md`
 2. 再看一个题材目录（例如 `都市悬疑/` 或 `异能志怪/`）
 3. 再看该题材下的 `.github/prompts/` 与 `.github/skills/`
 4. 最后看 `scripts/` 里的质检与门禁脚本

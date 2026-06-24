@@ -26,7 +26,7 @@ applyTo: "**/SKILL.md"
 
 ## 落位规则
 
-- 通用能力放入 `通用skills/`
+- 通用能力放入 `CommonSkills/`
 - 题材专属能力放入对应题材目录
 - `scripts/` 只放通用脚本，不放 Skill
 - `仅用于参考/` 只放外部参考内容，不放项目规范性 Skill
@@ -34,7 +34,7 @@ applyTo: "**/SKILL.md"
 
 ## 命名规则
 
-- `通用skills/` 下的 Skill 目录名与 Skill 名称都必须以 `通用-` 为前缀
+- `CommonSkills/` 下的 Skill 目录名与 Skill 名称都必须以 `通用-` 为前缀
 - 题材目录下的 Skill 目录名与 Skill 名称都必须以 `题材名-` 为前缀
 - Skill 目录名应与 frontmatter 中的 `name` 保持一致
 - Skill、提示词、参考资料及相关目录名应优先使用中文
