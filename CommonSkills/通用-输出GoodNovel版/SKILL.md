@@ -1,8 +1,9 @@
-﻿---
+---
 name: 通用-输出GoodNovel版
 description: '用于把小说章节改写为更适合 GoodNovel 平台的英文版本。适合强调情绪黏性、关系张力、顺滑英文表达与持续阅读意愿的正文输出；供多个题材的 `题材名-输出GoodNovel版` 包装层路由使用。关键词：输出GoodNovel版、GoodNovel、英文平台、关系张力。'
 argument-hint: '要把哪一章输出为 GoodNovel 版？默认按“保留核心信息 + 英文情绪张力强化 + 直接按平台骨架改写”处理。'
 
+user-invocable: false
 ---
 
 # 通用-输出GoodNovel版

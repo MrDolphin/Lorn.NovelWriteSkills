@@ -3,6 +3,7 @@ name: 女频爱情-输出My Fiction版
 description: '用于【女频爱情】题材下的My Fiction 英文输出任务。作为题材包装层、兼容入口与路由层，负责保留女频爱情入口，补充情绪锚定、成长线优先、关系拉扯、柔爽感与平台节奏边界，并明确要求优先强制加载并使用 `通用-输出My Fiction版`。保互动感、关系拉扯、情绪即时性与英文平台可读性。'
 argument-hint: '要把哪一章女频爱情改成My Fiction版？默认按“保题材底盘，再按平台节奏拉开版本”处理。'
 
+user-invocable: false
 ---
 
 # 女频爱情-输出My Fiction版

@@ -1,4 +1,4 @@
-﻿---
+---
 name: 通用-深度研究
 description: "专用于小说写作的结构化深度研究 Skill。支持对题材趋势、平台生态、专业知识、场景环境、人物原型、写作技法、读者市场等小说写作核心研究域，执行'大纲生成→并行深搜→报告输出'的全流程深度调研。适合为总纲设计、故事设定、人物传记、故事面、平台评估等 Skill 提供可引用、可回写的研究成果。关键词：深度研究、写作研究、题材调研、平台研究、专业知识搜集、创作素材、写作技法研究、读者市场分析、场景考证。"
 description_zh: "专用于小说写作的结构化深度调研工作流，覆盖题材趋势、平台生态、专业知识、场景环境、人物原型、写作技法、读者市场等研究域"
@@ -12,6 +12,7 @@ display_name_en: "deep-research-novel"
 visibility: "public"
 icon: "https://codebuddy-platform-1258344699.cos.accelerate.myqcloud.com/public/45edac6b-2078-4678-89f3-6f9800cf5e5f/avatar/skill/au_92bccf05-0ab.png"
 
+user-invocable:  true
 ---
 
 # 通用-深度研究 — 小说写作结构化深度调研

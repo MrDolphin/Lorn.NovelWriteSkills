@@ -2,6 +2,7 @@
 
 allowed-tools: Read, Write, Glob, WebSearch, Task, AskUserQuestion
 description: 对小说写作相关话题进行初步调研，生成调研outline。用于题材趋势、平台生态、专业知识、场景环境、人物原型、写作技法、读者市场等研究域的深度调研。
+user-invocable: false
 ---
 
 # Research Skill - 小说写作初步调研

@@ -3,6 +3,7 @@ name: create-genre-skill-skeletons
 description: 'Use when creating a full or partial set of genre wrapper skills under a genre directory. Builds `.github/skills/` subfolders and `SKILL.md` skeletons for a specified genre, keeps the `题材名-能力名` naming rule, and writes hard requirements that each genre skill must load and use its corresponding common skill when that common skill already exists.'
 argument-hint: '题材目录名，以及要创建全量标准清单还是其中一部分。'
 
+user-invocable: false
 ---
 
 # 题材 Skill 骨架批量生成器

@@ -1,4 +1,4 @@
-﻿---
+---
 name: 通用-小说项目初始化
 description: >
   用于在选定平台（七猫/起点/番茄/晋江等）与题材（科幻/悬疑/职场/爱情等）之后、设计大纲之前，完成项目级的战略初始化。
@@ -8,6 +8,7 @@ description: >
   关键词：项目初始化、项目策划、Agents.md、从数据出发、套路自主决策、蓝皮书
 argument-hint: --platform 七猫 --genre 都市悬疑
 
+user-invocable: false
 ---
 
 # 通用-小说项目初始化

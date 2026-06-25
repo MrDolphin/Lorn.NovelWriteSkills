@@ -2,6 +2,7 @@
 
 description: Summarize deep research results into markdown report, cover all fields, skip uncertain values.
 allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
+user-invocable: false
 ---
 
 # Research Report - Summary Report

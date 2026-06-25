@@ -2,6 +2,7 @@
 
 description: Read research outline, launch independent agent for each item for deep research. Disable task output.
 allowed-tools: Bash, Read, Write, Glob, WebSearch, Task
+user-invocable: false
 ---
 
 # Research Deep - Deep Research

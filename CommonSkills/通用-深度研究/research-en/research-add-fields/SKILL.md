@@ -2,6 +2,7 @@
 
 description: Add field definitions to existing research outline.
 allowed-tools: Bash, Read, Write, Glob, WebSearch, Task, AskUserQuestion
+user-invocable: false
 ---
 
 # Research Add Fields - Supplement Research Fields

@@ -2,6 +2,7 @@
 
 description: 读取调研outline，为每个item启动独立agent，从小说创作者视角进行深度调研。禁用task output。
 allowed-tools: Bash, Read, Write, Glob, WebSearch, Task
+user-invocable: false
 ---
 
 # Research Deep - 小说写作深度调研

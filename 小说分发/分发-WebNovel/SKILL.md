@@ -3,6 +3,7 @@ name: 分发-WebNovel
 description: 用于将 `WebNovel/` 目录内指定章节批量上传到 WebNovel（Inkstone）作者后台并保存。支持按 `WebNovel/README.md` 读取账号、密码、书籍Id、书名与卷名校验，自动进入新建/修改章节页，填写合并标题输入框，录入正文与作者有话说，保存后循环处理下一章。关键词：WebNovel 上传、Inkstone、章节保存、批量传章、作者有话说、章节编辑。
 argument-hint: 给我 chapterPath 或 chapterPaths（位于 `WebNovel/` 目录），我会按 `WebNovel/README.md` 的账号与书籍信息逐章上传并保存，同时在需要登录时暂停等待你手动完成登录。
 
+user-invocable: true
 ---
 
 # 上传指定章节到 WebNovel 并保存

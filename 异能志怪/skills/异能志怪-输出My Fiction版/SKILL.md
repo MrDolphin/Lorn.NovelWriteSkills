@@ -3,6 +3,7 @@ name: 异能志怪-输出My Fiction版
 description: '用于【异能志怪】题材下的 My Fiction 平台输出任务。作为题材包装层、兼容入口与路由层，负责保留异能志怪入口、补充关系黏性与规则危机边界，并明确要求优先强制加载并使用 `通用-输出My Fiction版`。关键词：异能志怪My Fiction版、英文追更、关系黏性、规则危机。'
 argument-hint: '例如：把异能志怪某章改成更适合 My Fiction 的英文版本，并保留规则压力与人物拉扯。'
 
+user-invocable: false
 ---
 
 # 异能志怪-输出My Fiction版
