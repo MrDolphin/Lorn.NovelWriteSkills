@@ -214,7 +214,7 @@ user-invocable: false
 |---|---|---|
 | 2.4 | 运行 `scripts/count-chapter.ps1 -FilePath "CHAPTER_FILE"`，读取 JSON 输出中的 `BodyCJK / MeetsMinCJK / WithinRange`。**正文字数检测必须使用 count-chapter.ps1，不得用 Len、NoWhitespaceLen、编辑器字符数或目测代替；正文门禁只看 BodyCJK/MeetsMinCJK/WithinRange** | — |
 | 2.5 | **强制判断**：`MeetsMinCJK == true`？ | ✅ → 允许离开本步骤（进 2.6）<br>❌ → **必须**回到 2.1（扩写模式），重写正文/作者有话说后覆盖写入，再回到 2.4 重新检测 |
-| 2.6 | **扩写循环上限**：同一 CHAPTER_FILE 连续扩写最多 3 轮。3 轮后 MeetsMinCJK 仍为 false → 暂停本步骤，在日志中记录 `blocked_word_count_insufficient`，输出需要人工介入的说明，不得强行进入步骤 3 | — |
+| 2.6 | **扩写循环上限**：同一 CHAPTER_FILE 连续扩写最多 8 轮。8 轮后 MeetsMinCJK 仍为 false → 暂停本步骤，在日志中记录 `blocked_word_count_insufficient`，输出需要人工介入的说明，不得强行进入步骤 3 | — |
 
 **扩写循环期间**：每轮扩写必须调用 `通用-创建小说正文（扩写模式）` 增加实际内容（新增场景/对话/描写/回报），**禁止用空行、重复句、标点填充等凑字数手段**。每轮扩写后必须重新执行 2.4 检测。
 
@@ -228,7 +228,7 @@ user-invocable: false
 **【强制完成前提】**
 本步骤的完成标记只在满足以下全部条件时写入：
 - `count-chapter.ps1` 已执行，`MeetsMinCJK == true`
-- 扩写循环未超过 3 轮上限（或已记录 `blocked_word_count_insufficient`）
+- 扩写循环未超过 8 轮上限（或已记录 `blocked_word_count_insufficient`）
 - 四拍复核与补检包已执行
 
 **文件写入：** 每轮扩写后覆盖写入 CHAPTER_FILE
@@ -495,9 +495,9 @@ IF 综合评分 > 9.2 且这是该章节 连续第二轮 过线：
 - 评审报告必须包含双轴评分字段，否则视为审阅未完成。
 - 评分 8.8/8.9/9.0/9.1/9.2 一律视为未达标（必须**严格大于** 9.2）。
 - "连续两轮"中的第二轮复审必须是**对当前修订版本的一次完整、从严、独立的重新审阅**，既要检查上一轮问题是否已实质性修复，也要重新发现本轮新增问题；不得以"与上一轮相比有进步"替代独立评分标准。
-- 回炉循环默认最多执行 3 轮。超过 3 轮仍未达标 → 暂停并记录 `blocked_review_plateau`，输出需要人工介入的说明。
+- 回炉循环默认最多执行 8 轮。超过 8 轮仍未达标 → 暂停并记录 `blocked_review_plateau`，输出需要人工介入的说明。
 - 连续两轮评分差异不超过 0.15 → 判定进入高原期，强制截停。
-- 第 3 轮评分若反而低于第 2 轮 → 强制截停。
+- 第 8 轮评分若反而低于第 7 轮 → 强制截停。
 
 **【强制完成前提】**
 本步骤的完成标记只在满足以下全部条件时写入：
