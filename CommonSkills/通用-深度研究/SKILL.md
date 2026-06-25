@@ -11,7 +11,7 @@ display_name: "通用-深度研究"
 display_name_en: "deep-research-novel"
 visibility: "public"
 icon: "https://codebuddy-platform-1258344699.cos.accelerate.myqcloud.com/public/45edac6b-2078-4678-89f3-6f9800cf5e5f/avatar/skill/au_92bccf05-0ab.png"
-user-invocable: true
+
 ---
 
 # 通用-深度研究 — 小说写作结构化深度调研

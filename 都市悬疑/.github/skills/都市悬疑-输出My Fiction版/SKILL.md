@@ -2,7 +2,7 @@
 name: 都市悬疑-输出My Fiction版
 description: '用于【都市悬疑】题材下的 My Fiction 平台输出任务。作为题材包装层、兼容入口与路由层，负责保留都市悬疑入口、补充关系黏性与调查驱动边界，并明确要求优先强制加载并使用 `通用-输出My Fiction版`。关键词：都市悬疑My Fiction版、英文追更、关系张力。'
 argument-hint: '要把哪一章都市悬疑改成 My Fiction 版？默认按“保案件推进、关系拉力与英文追更感”处理。'
-user-invocable: false
+
 ---
 
 # 都市悬疑-输出My Fiction版

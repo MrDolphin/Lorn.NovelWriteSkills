@@ -2,7 +2,7 @@
 name: 通用-输出My Fiction版
 description: '用于把小说章节改写为更适合 My Fiction 平台的英文版本。适合强调关系黏性、持续追更、互动感、轻强情绪与英文平台可读性的正文输出；供多个题材的 `题材名-输出My Fiction版` 包装层路由使用。关键词：输出My Fiction版、My Fiction、英文平台、互动追更。'
 argument-hint: '要把哪一章输出为 My Fiction 版？默认按“保留核心信息 + 英文互动追更感强化 + 直接按平台骨架改写”处理。'
-user-invocable: false
+
 ---
 
 # 通用-输出My Fiction版

@@ -1,5 +1,5 @@
 ---
-user-invocable: false
+
 description: 向现有小说写作调研outline补充字段定义。优先补充对创作者有直接价值的"创作可迁移"维度字段。
 allowed-tools: Bash, Read, Write, Glob, WebSearch, Task, AskUserQuestion
 ---

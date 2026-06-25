@@ -7,7 +7,7 @@ description: >
   最核心最重要的产出物：小说项目根目录下的 Agents.md（必须产出）。同时产出"项目初始化蓝皮书"作为详细决策依据文件。
   关键词：项目初始化、项目策划、Agents.md、从数据出发、套路自主决策、蓝皮书
 argument-hint: --platform 七猫 --genre 都市悬疑
-user-invocable: false
+
 ---
 
 # 通用-小说项目初始化

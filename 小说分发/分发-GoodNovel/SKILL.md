@@ -2,7 +2,7 @@
 name: 分发-GoodNovel
 description: 用于将 `GoodNovel/` 目录内指定章节批量上传到 GoodNovel 作者后台并保存。支持按 `GoodNovel/README.md` 读取账号、密码、书籍Id、书名校验，自动进入新建/修改章节页、填写合并标题输入框、粘贴正文并保存。该平台无作者有话说入口、且无可稳定获取章节ID的接口，流程改用“章节唯一键 + 列表标题/状态快照”判定已上传与修改。关键词：GoodNovel 上传、章节保存、批量传章、无章节ID记录方案、英文平台。
 argument-hint: 给我 chapterPath 或 chapterPaths（位于 `GoodNovel/` 目录），我会按 `GoodNovel/README.md` 的账号与书籍信息逐章上传并保存；如需登录会暂停等待你手动完成。
-user-invocable: true
+
 ---
 
 # 上传指定章节到 GoodNovel 并保存

@@ -2,7 +2,7 @@
 name: 都市悬疑-输出WebNovel版
 description: '用于【都市悬疑】题材下的 WebNovel 平台输出任务。作为题材包装层、兼容入口与路由层，负责保留都市悬疑入口、补充调查逻辑与跨文化可读边界，并明确要求优先强制加载并使用 `通用-输出WebNovel版`。关键词：都市悬疑WebNovel版、跨文化悬疑、英文连载。'
 argument-hint: '要把哪一章都市悬疑改成 WebNovel 版？默认按“保推理链、压迫感与跨文化可读性”处理。'
-user-invocable: false
+
 ---
 
 # 都市悬疑-输出WebNovel版
