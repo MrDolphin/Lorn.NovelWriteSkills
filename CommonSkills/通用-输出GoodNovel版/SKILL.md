@@ -1,4 +1,4 @@
----
+﻿---
 name: 通用-输出GoodNovel版
 description: '用于把小说章节改写为更适合 GoodNovel 平台的英文版本。适合强调情绪黏性、关系张力、顺滑英文表达与持续阅读意愿的正文输出；供多个题材的 `题材名-输出GoodNovel版` 包装层路由使用。关键词：输出GoodNovel版、GoodNovel、英文平台、关系张力。'
 argument-hint: '要把哪一章输出为 GoodNovel 版？默认按“保留核心信息 + 英文情绪张力强化 + 直接按平台骨架改写”处理。'
@@ -6,6 +6,10 @@ argument-hint: '要把哪一章输出为 GoodNovel 版？默认按“保留核�
 ---
 
 # 通用-输出GoodNovel版
+> **题材路由**：若 题材专用\ 目录存在对应的 <题材>-输出GoodNovel版 Skill，则：
+> - 将题材特性骨架路由到 <题材>-输出GoodNovel版，该 Skill 位于 题材专用\ 目录。
+> - 命中本技能时，必须优先强制加载当前 Skill 与 <题材>-输出GoodNovel版。
+
 
 这是平台共性本体，负责承接“GoodNovel 版输出”的跨题材共性规则。
 
