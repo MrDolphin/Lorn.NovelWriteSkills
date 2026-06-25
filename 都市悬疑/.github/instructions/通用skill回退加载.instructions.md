@@ -7,8 +7,9 @@ VS Code 对 skill 注册数量存在未披露的上限，超过后 `通用-*` sk
 遇到 skill 加载失败时，按以下顺序处理：
 
 1. **重试加载** → 再次调用 skill 加载指令
-2. **文件回退** → 若重试仍失败，前往 `CommonSkills/` 目录找到对应 skill 目录，用 `read_file` 读取 `SKILL.md` 及 `references/` 中的全部文件
-3. **加载执行** → 读取后立即按该 skill 的规则执行，不得以任何理由搁置
+2. **路径加载** → 若重试仍失败，使用 `skill("CommonSkills/通用-{skill名}")` 直接指定路径加载（比 `read_file` 手动读取更优）
+3. **手动回退** → 若路径加载无效，再用 `read_file` 读取对应 `SKILL.md` 及 `references/` 中的全部文件
+4. **加载执行** → 获取 skill 内容后立即按其规则执行，不得以任何理由搁置
 
 ## 绝对禁止
 
