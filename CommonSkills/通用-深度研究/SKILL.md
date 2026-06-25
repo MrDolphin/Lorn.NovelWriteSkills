@@ -15,8 +15,8 @@ icon: "https://codebuddy-platform-1258344699.cos.accelerate.myqcloud.com/public/
 ---
 
 # 通用-深度研究 — 小说写作结构化深度调研
-> **题材路由**：若 题材专用\ 目录存在对应的 <题材>-深度研究 Skill，则：
-> - 将题材特性骨架路由到 <题材>-深度研究，该 Skill 位于 题材专用\ 目录。
+> **题材路由**：若 .github\题材专用Skills\ 目录存在对应的 <题材>-深度研究 Skill，则：
+> - 将题材特性骨架路由到 <题材>-深度研究，该 Skill 位于 .github\题材专用Skills\ 目录。
 > - 命中本技能时，必须优先强制加载当前 Skill 与 <题材>-深度研究。
 
 

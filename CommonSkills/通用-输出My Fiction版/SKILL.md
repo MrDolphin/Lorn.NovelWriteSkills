@@ -6,8 +6,8 @@ argument-hint: '要把哪一章输出为 My Fiction 版？默认按“保留核�
 ---
 
 # 通用-输出My Fiction版
-> **题材路由**：若 题材专用\ 目录存在对应的 <题材>-输出My Fiction版 Skill，则：
-> - 将题材特性骨架路由到 <题材>-输出My Fiction版，该 Skill 位于 题材专用\ 目录。
+> **题材路由**：若 .github\题材专用Skills\ 目录存在对应的 <题材>-输出My Fiction版 Skill，则：
+> - 将题材特性骨架路由到 <题材>-输出My Fiction版，该 Skill 位于 .github\题材专用Skills\ 目录。
 > - 命中本技能时，必须优先强制加载当前 Skill 与 <题材>-输出My Fiction版。
 
 
