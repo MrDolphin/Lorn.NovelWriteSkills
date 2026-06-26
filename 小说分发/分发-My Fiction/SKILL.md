@@ -6,9 +6,15 @@ argument-hint: 给我 chapterPath 或 chapterPaths（位于 `My Fiction/` 目录
 user-invocable: true
 ---
 
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
 # 上传指定章节到 My Fiction 并保存
 
 用于把你指定的 1 章或多章，上传到 My Fiction 对应作品下，并按后台要求保存。
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 工作目录路由规则（强制）
 

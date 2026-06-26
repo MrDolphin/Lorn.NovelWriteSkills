@@ -6,6 +6,12 @@ argument-hint: '要蒸馏哪位作者的文风？默认需要指定作者名与�
 user-invocable:  true
 ---
 
+
+
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
+
 # 通用-蒸馏作者文风
 > **题材路由**：若 .github\题材专用Skills\ 目录存在对应的 <题材>-蒸馏作者文风 Skill，则：
 > - 将题材特性骨架路由到 <题材>-蒸馏作者文风，该 Skill 位于 .github\题材专用Skills\ 目录。
@@ -13,6 +19,11 @@ user-invocable:  true
 
 
 > 核心理念借鉴自 [女娲 · Skill造人术](https://github.com/alchaincyf/nuwa-skill)：不是复制作者的文本，而是**提炼作者的可测量文笔 DNA**——让写/审/改 Skill 能按这套 DNA 约束输出，而不是凭空模仿。
+
+
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 继续读取的 references
 

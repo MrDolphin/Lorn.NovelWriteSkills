@@ -6,11 +6,22 @@ argument-hint: '给我 OUTLINE_FILE 与 CHAPTER_FILE；若是多章，可给 CHA
 user-invocable: false
 ---
 
+
+
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
+
 # 通用-章节创作闭环
 > **题材路由**：若 .github\题材专用Skills\ 目录存在对应的 <题材>-章节创作闭环 Skill，则：
 > - 将题材特性骨架路由到 <题材>-章节创作闭环，该 Skill 位于 .github\题材专用Skills\ 目录。
 > - 命中本技能时，必须优先强制加载当前 Skill 与 <题材>-章节创作闭环。
 
+
+
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 执行安保（硬性门禁）
 
@@ -74,6 +85,9 @@ user-invocable: false
 - references/九部件与进度节奏续跑卡.md — 卡顿恢复参考
 - references/章节链路闭环复核与回写决策卡.md — 闭环复核参考
 - references/三批次修订SOP与门禁节奏.md — 修订批次参考
+
+
+<!-- ===== Layer 2: 项目级缓存 ===== -->
 
 ## 风格/蓝本/写作研究模板自动发现规则
 

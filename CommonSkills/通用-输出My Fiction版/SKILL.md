@@ -6,6 +6,9 @@ argument-hint: '要把哪一章输出为 My Fiction 版？默认按“保留核�
 user-invocable: false
 ---
 
+
+
+
 # 通用-输出My Fiction版
 > **题材路由**：若 .github\题材专用Skills\ 目录存在对应的 <题材>-输出My Fiction版 Skill，则：
 > - 将题材特性骨架路由到 <题材>-输出My Fiction版，该 Skill 位于 .github\题材专用Skills\ 目录。
@@ -14,12 +17,20 @@ user-invocable: false
 
 这是平台共性本体，负责承接“My Fiction 版输出”的跨题材共性规则。
 
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
 ## 常见触发词 / 用户说法速查
 
 - 输出My Fiction版
 - 改成 My Fiction 能发的版本
 - 做 My Fiction 英文平台改写
 - 帮我把这章改得更有互动追更感
+
+
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 何时使用
 
@@ -77,6 +88,9 @@ user-invocable: false
 - **可变层（每次变化，不写入本文件）**：本次目标章节号、源稿路径、用户指定的特殊平台约束 → 由用户每次调用时指定，按正常输入价计费
 
 人物传记、故事设定、写作研究模板等 references 通过 `## 继续读取的 references` 声明强制加载，其固定部分随本 Skill 一起进入缓存前缀。
+
+
+<!-- ===== Layer 2: 项目级缓存 ===== -->
 
 ## 平台模板自动发现规则
 

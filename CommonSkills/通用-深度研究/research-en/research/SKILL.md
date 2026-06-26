@@ -1,9 +1,12 @@
 ---
-
+name: deep-research-preliminary
 allowed-tools: Read, Write, Glob, WebSearch, Task, AskUserQuestion
 description: Conduct preliminary research on a topic and generate research outline. For academic research, benchmark research, technology selection, etc.
 user-invocable: false
 ---
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
 
 # Research Skill - Preliminary Research
 

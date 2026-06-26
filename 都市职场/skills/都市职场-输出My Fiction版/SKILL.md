@@ -6,9 +6,15 @@ argument-hint: '要把哪一章都市职场改成 My Fiction 版？默认按“�
 user-invocable: false
 ---
 
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
 # 都市职场-输出My Fiction版
 
 这是题材包装层、兼容入口与路由层。
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 对应通用 Skill
 

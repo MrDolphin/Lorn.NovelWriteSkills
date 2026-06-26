@@ -1,11 +1,14 @@
 ---
-
+name: 通用-深度研究-研究报告
 description: 将 deep 调研结果汇总为小说创作者可直接使用的 Markdown 研究报告，覆盖所有字段，跳过不确定值。报告落盘到项目或题材的 `写作研究/` 目录。
 allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
 user-invocable: false
 ---
 
-# Research Report - 小说写作研究报告生成
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
+
+# 通用-深度研究-研究报告
 
 ## 触发方式
 `/research-report`

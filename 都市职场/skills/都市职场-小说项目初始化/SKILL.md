@@ -6,9 +6,15 @@ argument-hint: '--platform 七猫 --genre 都市职场。初始化哪本都市�
 user-invocable: false
 ---
 
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
 # 都市职场-小说项目初始化
 
 这是题材包装层、兼容入口与路由层。
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 对应通用 Skill
 

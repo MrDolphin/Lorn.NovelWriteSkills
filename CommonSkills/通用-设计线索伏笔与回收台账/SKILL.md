@@ -6,6 +6,12 @@ argument-hint: '要处理哪份线索/伏笔台账？默认同时检查字段结
 user-invocable: false
 ---
 
+
+
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
+
 # 通用-设计线索伏笔与回收台账
 > **题材路由**：若 .github\题材专用Skills\ 目录存在对应的 <题材>-设计线索伏笔与回收台账 Skill，则：
 > - 将题材特性骨架路由到 <题材>-设计线索伏笔与回收台账，该 Skill 位于 .github\题材专用Skills\ 目录。
@@ -13,6 +19,11 @@ user-invocable: false
 
 
 线索与伏笔不是装饰品，而是作者侧的追读承诺管理系统。
+
+
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 继续读取的 references
 
@@ -25,6 +36,9 @@ user-invocable: false
 - `references/推理公平性与谜底兑现检查.md`
 - `references/腾讯专栏悬疑线索与铺垫规则增补.md`
 - `references/腾讯专栏铺垫反转关系与伏笔回收增补.md`
+
+
+<!-- ===== Layer 2: 项目级缓存 ===== -->
 
 ## 风格/蓝本/写作研究模板自动发现规则
 

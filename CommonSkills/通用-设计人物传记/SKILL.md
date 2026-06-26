@@ -6,6 +6,12 @@ argument-hint: '要设计或重写哪个人物传记？默认按“外层识别�
 user-invocable: false
 ---
 
+
+
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
+
 # 通用-设计人物传记
 > **题材路由**：若 .github\题材专用Skills\ 目录存在对应的 <题材>-设计人物传记 Skill，则：
 > - 将题材特性骨架路由到 <题材>-设计人物传记，该 Skill 位于 .github\题材专用Skills\ 目录。
@@ -13,6 +19,11 @@ user-invocable: false
 
 
 人物传记应写成作者可长期调用的裁判源，而不是漂亮但难落地的人设简介。
+
+
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 继续读取的 references
 
@@ -34,6 +45,9 @@ user-invocable: false
 - `references/nuwa-深度人物心智模型注入.md`
 - `references/弧光四象限与配角独立动机.md`
 - `references/正文可调用素材清单.md`
+
+
+<!-- ===== Layer 2: 项目级缓存 ===== -->
 
 ## 风格/蓝本/写作研究模板自动发现规则
 

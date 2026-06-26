@@ -36,22 +36,20 @@ name: "新增题材目录模板"
 ```text
 题材名/
   写作研究/
-  .github/
-    prompts/
-    skills/
-    agents/
-    instructions/
+  ·prompts/
+  skills/
+  agents/
+  instructions/
 ```
 
 说明：
 
 - `写作研究/` 是默认研究资料落位
-- `.github/` 是题材目录下的主工作目录，用于承载该题材的可执行 AI 资产
-- `.github/prompts/` 用于放题材专属 Prompt
-- `.github/skills/` 用于放题材专属 Skill
-- `.github/agents/` 用于放题材专属 Agent
-- `.github/instructions/` 用于放该题材范围内生效的局部 instructions
-- 题材 Prompt frontmatter 中声明的 `agent` 默认指向同题材目录下 `.github/agents/` 中的 Agent；若工具链给出“未知智能体”之类告警，默认应忽略，不要仅因告警就随意改动既有 `agent:` 声明
+- `prompts/` 用于放题材专属 Prompt
+- `skills/` 用于放题材专属 Skill
+- `agents/` 用于放题材专属 Agent
+- `instructions/` 用于放该题材范围内生效的局部 instructions
+- 题材 Prompt frontmatter 中声明的 `agent` 默认指向同题材目录下 `agents/` 中的 Agent；若工具链给出“未知智能体”之类告警，默认应忽略，不要仅因告警就随意改动既有 `agent:` 声明
 - 题材相关的提示词、Skill、Agent、局部指令、写作参考、调查研究等内容，都应归属于该题材目录
 - 不要为了“看起来完整”而预先创建大量空目录
 
@@ -94,8 +92,8 @@ name: "新增题材目录模板"
 - 该内容是否真的属于题材专属，而不是通用能力
 - 一级目录名是否为中文
 - 是否与现有题材目录重复或高度近义
-- 是否至少包含 `写作研究/` 与 `.github/`
-- `.github/` 下是否按需要包含 `prompts/`、`skills/`、`agents/`、`instructions/`
+- 是否至少包含 `写作研究/` 
+- 是否按需要包含 `prompts/`、`skills/`、`agents/`、`instructions/`
 - 是否把本该去 `CommonSkills/`、`scripts/`、`仅用于参考/` 的内容误放进来了
 - 若后续计划在该题材目录内补 Skill 或模板，是否已经预先考虑哪些部分其实应先沉淀为通用 Skill
 - 若创建题材 Skill，Skill 名称和目录名前缀是否正确
@@ -105,8 +103,8 @@ name: "新增题材目录模板"
 1. 先确定题材名
 2. 创建题材一级目录
 3. 创建 `写作研究/`
-4. 创建 `.github/`
-5. 在 `.github/` 下按需补充 `prompts/`、`skills/`、`agents/`、`instructions/`
+4. 创建 `prompts/`、`skills/`、`agents/`、`instructions/`
+5. 在这些目录下按需补充相应内容
 6. 再根据真实需求补充题材 Skill、提示词、Agent、局部规则或参考资料
 7. 最后检查命名、前缀与落位是否符合仓库规范
 

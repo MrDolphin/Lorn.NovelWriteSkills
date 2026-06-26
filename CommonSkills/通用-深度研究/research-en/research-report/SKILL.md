@@ -1,9 +1,12 @@
 ---
-
+name: deep-research-report
 description: Summarize deep research results into markdown report, cover all fields, skip uncertain values.
 allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
 user-invocable: false
 ---
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
 
 # Research Report - Summary Report
 

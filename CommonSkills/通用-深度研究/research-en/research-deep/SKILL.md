@@ -1,9 +1,12 @@
 ---
-
+name: deep-research-deep
 description: Read research outline, launch independent agent for each item for deep research. Disable task output.
 allowed-tools: Bash, Read, Write, Glob, WebSearch, Task
 user-invocable: false
 ---
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
 
 # Research Deep - Deep Research
 

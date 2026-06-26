@@ -116,7 +116,7 @@ CommonSkills/
 ### 题材平台补丁结构
 
 ```
-题材名/.github/skills/
+题材名/skills/
   题材名-输出番茄版/
     SKILL.md                       # frontmatter + 题材入口说明
     references/

@@ -1,21 +1,11 @@
 ---
 name: 通用-深度研究
-description: "专用于小说写作的结构化深度研究 Skill。支持对题材趋势、平台生态、专业知识、场景环境、人物原型、写作技法、读者市场等小说写作核心研究域，执行'大纲生成→并行深搜→报告输出'的全流程深度调研。适合为总纲设计、故事设定、人物传记、故事面、平台评估等 Skill 提供可引用、可回写的研究成果。关键词：深度研究、写作研究、题材调研、平台研究、专业知识搜集、创作素材、写作技法研究、读者市场分析、场景考证。"
-description_zh: "专用于小说写作的结构化深度调研工作流，覆盖题材趋势、平台生态、专业知识、场景环境、人物原型、写作技法、读者市场等研究域"
-description_en: "Structured deep research workflow for novel writing: genre trends, platform ecology, domain knowledge, scene research, character archetypes, writing techniques, reader market analysis"
-version: 2.1.0
-homepage: https://github.com/Weizhena/Deep-Research-skills
-license: MIT
-allowed-tools: Read, Write, Glob, WebSearch, Task, AskUserQuestion
-display_name: "通用-深度研究"
-display_name_en: "deep-research-novel"
-visibility: "public"
-icon: "https://codebuddy-platform-1258344699.cos.accelerate.myqcloud.com/public/45edac6b-2078-4678-89f3-6f9800cf5e5f/avatar/skill/au_92bccf05-0ab.png"
-
-user-invocable:  true
+description: "专用于小说写作的结构化深度研究 Skill。支持对题材趋势、平台生态、专业知识、场景环境、人物原型、写作技法、读者市场等研究域，执行大纲生成→并行深搜→报告输出的全流程深度调研。关键词：深度研究、写作研究、题材调研。"
+argument-hint: "研究什么课题？例如：起点中文网都市悬疑题材2025-2026趋势。可选指定研究域：题材趋势/平台生态/专业知识/场景环境/人物原型/写作技法/读者市场。"
+user-invocable: true
 ---
 
-# 通用-深度研究 — 小说写作结构化深度调研
+# 通用-深度研究
 > **题材路由**：若 .github\题材专用Skills\ 目录存在对应的 <题材>-深度研究 Skill，则：
 > - 将题材特性骨架路由到 <题材>-深度研究，该 Skill 位于 .github\题材专用Skills\ 目录。
 > - 命中本技能时，必须优先强制加载当前 Skill 与 <题材>-深度研究。
@@ -31,6 +21,10 @@ user-invocable:  true
 - 最后汇总为可直接保存到 `调研报告/`（项目强相关）或 `写作研究/`（通用/题材相关）目录下的 Markdown 报告。
 
 基于 [Deep-Research-skills](https://github.com/Weizhena/Deep-Research-skills) 项目架构，改造为小说写作专用版本。
+
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 核心命令
 

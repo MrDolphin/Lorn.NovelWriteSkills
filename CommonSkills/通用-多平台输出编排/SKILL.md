@@ -6,11 +6,22 @@ argument-hint: '请给我一个 chapterPath 或 chapterPaths；platforms 可以�
 user-invocable: false
 ---
 
+
+
+
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
+
 # 通用-多平台输出编排
 > **题材路由**：若 .github\题材专用Skills\ 目录存在对应的 <题材>-多平台输出编排 Skill，则：
 > - 将题材特性骨架路由到 <题材>-多平台输出编排，该 Skill 位于 .github\题材专用Skills\ 目录。
 > - 命中本技能时，必须优先强制加载当前 Skill 与 <题材>-多平台输出编排。
 
+
+
+
+
+<!-- ===== Layer 3: 场景缓存 ===== -->
 
 ## 执行安保（硬性门禁）
 
@@ -279,6 +290,9 @@ IF 以上三项同时满足：
 4. 每个平台写入后先显式运行字数门禁：正文与 ## 作者有话说 必须同时达标。字数参数优先级：①Agents.md 中该平台的字数指定 → ②该平台通用-输出*版/SKILL.md 的平台默认字数范围 → ③回退通用软参考。若只补测作者有话说，中文用 count-afterword.ps1，英文用 count-afterword-words.ps1
 5. 在字数达标的前提下，再按已锁定的 platformPovContract 运行 POV 门禁
 6. 最后执行分语言终检、日志收口与摘要输出
+
+
+<!-- ===== Layer 2: 项目级缓存 ===== -->
 
 ## 平台 POV 契约与连续性门禁（强制）
 

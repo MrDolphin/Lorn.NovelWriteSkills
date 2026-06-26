@@ -14,20 +14,19 @@ name: "题材目录内部资产布局规范"
 ```text
 题材名/
   写作研究/
-  .github/
-    prompts/
-    skills/
-    agents/
-    instructions/
+  prompts/
+  skills/
+  agents/
+  instructions/
 ```
 
 说明：
 
 - `写作研究/` 放题材研究、平台调研、写作分析、外部资料整理等研究型内容
-- `.github/prompts/` 放该题材专属 Prompt
-- `.github/skills/` 放该题材专属 Skill
-- `.github/agents/` 放该题材专属 Agent
-- `.github/instructions/` 放仅对该题材目录有意义的局部指令
+- `prompts/` 放该题材专属 Prompt
+- `skills/` 放该题材专属 Skill
+- `agents/` 放该题材专属 Agent
+- `instructions/` 放仅对该题材目录有意义的局部指令
 
 ## 各目录的职责边界
 
@@ -47,7 +46,7 @@ name: "题材目录内部资产布局规范"
 - Agent 定义文件
 - 本应作为局部规则生效的 instructions
 
-### `.github/prompts/`
+### `prompts/`
 
 用于存放：
 
@@ -66,7 +65,7 @@ name: "题材目录内部资产布局规范"
 - 题材目录下 Prompt frontmatter 中声明的 `agent`，默认应视为指向**同题材目录** `.github/agents/` 中的 Agent 名称空间，不应默认改成去根 `.github/agents/` 或其他题材目录中解析。
 - 若编辑器、工具链或校验器对这类 `agent:` 声明报出“未知智能体”或类似告警，默认按局部解析受限处理并忽略；不要仅因为告警存在，就随意把现有 `agent:` 改名、改绑或删除。
 
-### `.github/skills/`
+### `skills/`
 
 用于存放：
 
@@ -85,7 +84,7 @@ name: "题材目录内部资产布局规范"
 
 每个 Skill 应独立成目录，并以 `题材名-` 为前缀命名。
 
-### `.github/agents/`
+### `agents/`
 
 用于存放：
 
@@ -94,16 +93,16 @@ name: "题材目录内部资产布局规范"
 
 只有当 Agent 明显带有该题材语境、任务目标或风格职责时，才放在题材目录下。
 
-同时，这里的 Agent 也是该题材目录下 `.github/prompts/*.prompt.md` 中 `agent:` 字段的默认解析落点；维护 Prompt 时，应优先按“同题材 Prompt → 同题材 `.github/agents/`”的关系理解与维护。
+同时，这里的 Agent 也是该题材目录下 `prompts/*.prompt.md` 中 `agent:` 字段的默认解析落点；维护 Prompt 时，应优先按“同题材 Prompt → 同题材 `agents/`”的关系理解与维护。
 
-### `.github/instructions/`
+### `instructions/`
 
 用于存放：
 
 - 仅对某个题材目录或该题材内部某类文件生效的局部指令
 - 该题材独有的命名、结构、审阅、输出或迁移规则
 
-如果规则适用于整个仓库，应优先放到根 `.github/instructions/` 或根 `AGENTS.md`，不要无谓下沉到题材目录。
+如果规则适用于整个仓库，应优先放到根 `instructions/` 或根 `AGENTS.md`，不要无谓下沉到题材目录。
 
 ## 根 `.github` 与题材目录 `.github` 的边界
 
@@ -151,7 +150,7 @@ name: "题材目录内部资产布局规范"
 
 ## 不推荐做法
 
-- 把题材研究文件塞进 `.github/prompts/` 或 `.github/skills/`
+- 把题材研究文件塞进 `prompts/` 或 `skills/`
 - 把题材 Prompt 混放到根 `.github/prompts/`
 - 把跨题材通用能力做成某个题材目录下的专属 Skill
 - 把仓库级规则下沉为多个题材目录里的重复 instructions
@@ -160,7 +159,7 @@ name: "题材目录内部资产布局规范"
 ## 推荐做法
 
 - `写作研究/` 保持“研究材料池”定位
-- `.github/prompts/`、`.github/skills/`、`.github/agents/` 承载题材可执行资产
-- `.github/instructions/` 只写题材局部规则，不复制仓库级总规则
+- `prompts/`、`skills/`、`agents/` 承载题材可执行资产
+- `/instructions/` 只写题材局部规则，不复制仓库级总规则
 - 题材 Skill 优先与通用 Skill 形成“通用能力本体 + 题材包装层”关系
 - 对题材目录内资产做增量修改时，默认同步执行一次“通用沉淀检查”，把题材无关内容及时回收到通用层

@@ -1,11 +1,14 @@
 ---
-
+name: 通用-深度研究-追加课题
 description: 向现有调研outline补充items（调研对象）。
 allowed-tools: Bash, Read, Write, Glob, WebSearch, Task, AskUserQuestion
 user-invocable: false
 ---
 
-# Research Add Items - 补充调研对象
+<!-- ===== Layer 1: 永久缓存 ===== -->
+
+
+# 通用-深度研究-追加课题
 
 ## 触发方式
 `/research-add-items`

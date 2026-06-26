@@ -112,7 +112,7 @@ applyTo: "**/SKILL.md"
 
 ## 题材目录下 Prompt 与通用 Skill 的关系
 
-在各题材目录下的 `.github/prompts/*.prompt.md` 中：
+在各题材目录下的 `prompts/*.prompt.md` 中：
 
 - **不应直接引用通用 Skill**
 - **不应直接写通用 Skill 的文件路径**
