@@ -169,3 +169,8 @@ user-invocable: false
 - 本 Skill 负责**章节精修**，不是纯审阅，也不是纯去 AI 味。
 - 当文本主要问题是“腔调假、模板重、现实感被洗没了”时，应联动 `异能志怪-去AI味重写`。
 - 当文本主要问题是“结构失效、章节骨架本身不成立”时，应先做审阅或返工，不要直接硬润。
+## 继续读取的 references
+> 以下 references 为当前 skill 目录下的补充文件，按需加载。
+- references/line-level-polish-actions.md — 句级润色动作表（兼容壳）
+- references/migrated-polish-rules.md — 正文润色保真规则（兼容壳）
+- references/polish-chapter-checklist.md — 正文润色检查表（兼容壳）

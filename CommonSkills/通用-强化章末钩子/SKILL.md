@@ -458,3 +458,6 @@ user-invocable: false
 - 本 Skill 专攻结尾钩子，不负责整章精修。
 - 若用户需要整章的钩子—回报统筹，应交给正文润色类 skill。
 - 若用户要强化开头，不由本 Skill 处理。
+## 继续读取的 references
+> 以下 references 为当前 skill 目录下的补充文件，按需加载。
+- references/七猫专栏章末钩子升级增补.md — 七猫专栏：章末钩子类型升级增补

@@ -54,3 +54,23 @@ user-invocable: false
 
 - 不要把女频爱情写成只有恋爱推进、没有成长承重的空心甜宠稿。
 - 不要把情绪写成口号、把关系拉扯写成误会拖延、把爽点写成无代价碾压。
+## 继续读取的 references
+> 以下 references 为当前 skill 目录下的补充文件，按需加载。
+- 
+references/都市冷压迫来源保护清单.md — 女频爱情冷压迫来源保护清单
+- 
+references/实战自检与陷阱.md — 实战自检与陷阱
+- 
+references/数值双轨与视角保护.md — 数值双轨与视角保护
+- 
+references/通用风格与排版补充.md — 通用风格与排版补充
+- 
+references/与控制卡_正文润色_审阅章节正文的桥接规则.md — 与控制卡 / 正文润色 / 审阅章节正文的桥接规则
+- 
+references/AI味识别与改写工具包.md — AI味识别与改写工具包
+- 
+references/去AI味执行清单.md — 去AI味执行清单（题材补丁）
+- 
+references/三级改造与工具包.md — 三级改造与工具包（题材补丁）
+- 
+references/AI味识别雷达.md — AI味识别雷达（题材补丁）

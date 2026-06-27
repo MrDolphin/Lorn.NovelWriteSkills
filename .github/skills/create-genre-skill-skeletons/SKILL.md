@@ -20,8 +20,25 @@ user-invocable: true
 
 ## 继续读取的 references
 
-- `references/standard-genre-skill-list.md`
-- `references/genre-skill-skeleton-template.md`
+### 必读（每次执行都需读取）
+
+- `references/standard-genre-skill-list.md` — 标准题材 Skill 清单，决定本次是建全量还是子集
+- `references/genre-skill-skeleton-template.md` — Skill 骨架模板，每个入口骨架的正文结构依据
+
+### 输出平台迁移相关（按需读）
+
+以下文件用于输出平台 Prompt → Skill 的无损迁移场景。仅当本次任务涉及补建或修复输出类 Skill 骨架时才需读取：
+
+- `references/all-13-platform-section-recovery-mapping.md` — 13 个输出平台的分节级补救映射总图
+- `references/dual-genre-output-platform-migration-ledger.md` — 双题材（异能志怪 / 都市悬疑）输出平台迁移总台账
+- `references/output-platform-lossless-mapping-ledger-template.md` — 输出平台 Skill 无损迁移台账模板（迁移新平台时参考）
+- `references/output-platform-migration-audit-checklist.md` — 输出平台迁移审计检查清单（完工后审计用）
+- `references/pilot-shared-platform-lossless-mapping-ledger.md` — 首批共享平台（番茄 / 知乎 / WebNovel）迁移状态台账，供参考
+- `references/pilot-shared-platform-section-mapping.md` — 首批共享平台分节级无损映射施工图，供参考
+
+### 各平台台账（按需读）
+
+- `references/section-ledgers/` — 目录内含各平台的分节级台账文件（`番茄.md`、`知乎.md`、`起点中文网.md` 等 13 个平台），可按目标平台名读取对应文件
 
 ## Use this skill when
 

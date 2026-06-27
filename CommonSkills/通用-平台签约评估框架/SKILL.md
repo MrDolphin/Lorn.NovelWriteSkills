@@ -224,29 +224,29 @@ user-invocable: false
 以下 references 按目标平台加载；通用层固定加载项对所有平台生效。
 
 **固定加载（所有平台）**：
-- eferences/平台签约评估维度与权重.md
-- eferences/概率分段与一票否决规则.md
-- eferences/平台签约评估报告模板.md
-- eferences/评估模式与落盘规则.md
-- eferences/投稿成熟度审阅清单.md
-- eferences/平台错位诊断卡.md
-- eferences/套路赛道饱和度评估.md
-- eferences/大纲收入公式评估诊断.md
-- eferences/研究回灌补强.md
-- eferences/蒸馏产物对标签约评估.md
+- references/平台签约评估维度与权重.md
+- references/概率分段与一票否决规则.md
+- references/平台签约评估报告模板.md
+- references/评估模式与落盘规则.md
+- references/投稿成熟度审阅清单.md
+- references/平台错位诊断卡.md
+- references/套路赛道饱和度评估.md
+- references/大纲收入公式评估诊断.md
+- references/研究回灌补强.md
+- references/蒸馏产物对标签约评估.md
 
 **按平台条件加载**：
 - 目标平台为 **起点中文网**（含 Agents.md 解析为起点或默认回退起点）：
-  - eferences/起点默认审核流程与硬门槛.md
-  - eferences/腾讯专栏签约评估快审卡点与投稿成熟度增补.md
-  - eferences/起点数据指标与爆款分层标准.md
-  - eferences/起点数据指标与爆款分层标准.md
+  - references/起点默认审核流程与硬门槛.md
+  - references/腾讯专栏签约评估快审卡点与投稿成熟度增补.md
+  - references/起点数据指标与爆款分层标准.md
+  - references/起点数据指标与爆款分层标准.md
 - 目标平台为 **七猫 / 番茄**：
-  - eferences/七猫默认审核流程与硬门槛.md（如存在）
-  - eferences/番茄默认审核流程与硬门槛.md（如存在）
-  - eferences/短剧改编适配度快速评估.md
+  - references/七猫默认审核流程与硬门槛.md（如存在）
+  - references/番茄默认审核流程与硬门槛.md（如存在）
+  - references/短剧改编适配度快速评估.md
 - 目标平台为 **晋江**：
-  - eferences/晋江默认审核流程与硬门槛.md（如存在）
+  - references/晋江默认审核流程与硬门槛.md（如存在）
 
 ## 完整模板执行要求（强制）
 

@@ -428,3 +428,6 @@ user-invocable: true
 - 灵感：RhinoInsight — Improving Deep Research through Control Mechanisms for Model Behavior and Context
 - 小说写作改造：本工作区 Skill 体系
 - 信息质量验证框架与诚实边界方法论：借鉴自 [nuwa-skill（女娲·Skill造人术）](https://github.com/alchaincyf/nuwa-skill) —— 心智模型三重验证、矛盾处理原则、调研品味守则、分阶段质量检查点等品控方法论
+## 继续读取的 references
+> 以下 references 为当前 skill 目录下的补充文件，按需加载。
+- references/元数据归档.md — 元数据归档

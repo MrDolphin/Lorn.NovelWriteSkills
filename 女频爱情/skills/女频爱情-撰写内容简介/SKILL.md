@@ -51,3 +51,6 @@ user-invocable: false
 
 - 不要把女频爱情的题材判断做成抽象结论；必须落到人物处境、关系机制、情绪回报与平台识别。
 - 不要把本题材包装层写成通用 Skill 的平行副本。
+## 继续读取的 references
+> 以下 references 为当前 skill 目录下的补充文件，按需加载。
+- references/题材简介补充规则.md — 题材简介补充规则（女频爱情）

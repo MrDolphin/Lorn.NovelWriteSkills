@@ -27,6 +27,9 @@ user-invocable: false
 
 ## 继续读取的 references
 
+- `references/科幻类AI味典型问题.md` — 科幻小说AI味典型问题与修正策略
+- `references/七猫专栏OS叙事拐杖检测增补.md` — 七猫专栏 OS 叙事拐杖检测增补
+
 ### 总览：功能分组与读取时机
 
 18 个 reference 文件按**用途分层**分为 5 组。调用时先根据当前阶段锁定要读的组，再按本组的"读取时机"判断读哪些文件。
