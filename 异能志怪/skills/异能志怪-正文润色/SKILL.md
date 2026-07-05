@@ -169,8 +169,18 @@ user-invocable: false
 - 本 Skill 负责**章节精修**，不是纯审阅，也不是纯去 AI 味。
 - 当文本主要问题是“腔调假、模板重、现实感被洗没了”时，应联动 `异能志怪-去AI味重写`。
 - 当文本主要问题是“结构失效、章节骨架本身不成立”时，应先做审阅或返工，不要直接硬润。
-## 继续读取的 references
-> 以下 references 为当前 skill 目录下的补充文件，按需加载。
-- references/line-level-polish-actions.md — 句级润色动作表（兼容壳）
-- references/migrated-polish-rules.md — 正文润色保真规则（兼容壳）
-- references/polish-chapter-checklist.md — 正文润色检查表（兼容壳）
+## 继续读取的 references（强制读取门禁）
+
+**以下所列 references 文件必须通过 `read_file` 工具逐文件读取，不得因"已有相关知识"、"之前执行时已读过"、"该文件只是参考"为理由跳过任何一条。** 每条 references 按其标注的必读等级强制执行：
+
+- 标注 **必读** 的文件：必须读取，少一条即视为流程违规，不得开始执行流程。
+- 未标注必读的文件：必须读取，但读取后可仅提取与当前任务直接相关的段落，不要求逐字通读。
+- 若文件路径指向的文件不存在（如引用的外部路径未就位），必须在日志中显式记录 `reference_missing_{refName}`，不得静默跳过。
+
+> 以下 references 为当前 skill 目录下的补充文件，**强制读取**。
+- 
+references/line-level-polish-actions.md — 句级润色动作表（兼容壳）
+- 
+references/migrated-polish-rules.md — 正文润色保真规则（兼容壳）
+- 
+references/polish-chapter-checklist.md — 正文润色检查表（兼容壳）
