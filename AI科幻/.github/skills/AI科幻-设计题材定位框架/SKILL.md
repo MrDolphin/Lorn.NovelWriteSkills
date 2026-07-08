@@ -30,6 +30,8 @@ user-invocable: false
 
 - `references/题材边界与入口说明.md`
 - `references/AI科幻定位与项目裁判源.md`
+- `references/InkOS科幻题材规则.md` — InkOS 科幻题材规则（吸收参考）
+- `references/题材疲劳词表.md` — 科幻题材疲劳词表
 
 ## 常见触发词 / 用户说法速查
 

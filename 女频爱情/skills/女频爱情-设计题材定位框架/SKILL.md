@@ -85,3 +85,7 @@ user-invocable: false
 references/女频爱情定位与项目裁判源.md — 女频爱情定位与项目裁判源
 - 
 references/题材边界与入口说明.md — 题材边界与入口说明（女频爱情）
+- 
+references/InkOS爱情题材规则.md — InkOS 爱情/浪漫题材规则（吸收参考）
+- 
+references/题材疲劳词表.md — 女频/爱情题材疲劳词表
