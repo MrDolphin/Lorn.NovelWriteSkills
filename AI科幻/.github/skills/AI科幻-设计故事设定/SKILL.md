@@ -30,7 +30,7 @@ user-invocable: false
 
 ## 与入口 Prompt 的分工
 
-- 入口 Prompt `../prompts/撰写技术手法程序数据痕迹定.prompt.md` 继续负责公共写入规则与总体目标。
+- 入口 Prompt `../prompts/设计故事设定.prompt.md` 继续负责公共写入规则与总体目标。
 - 本包装层只负责题材入口兼容与路由。
 
 ## 常见触发词 / 用户说法速查
