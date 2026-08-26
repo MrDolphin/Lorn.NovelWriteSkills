@@ -23,6 +23,10 @@
 - `count-chapter.ps1`：统计章节数量的通用脚本。
 - `normalize_cn_body_paragraphs.ps1`：用于规范化中文段落的脚本。
 
+## 与 Skill 关联的审计脚本
+
+- `voice_audit_novel.py`：作者"像不像"四指标审计（`通用-作者风格进化` 消费，由 `通用-审阅章节正文` 在已注册作者风格进化数据源的项目上运行）。用法：`python scripts/voice_audit_novel.py --text {正文.md} --samples {作者原声样本库.md} --card {作者风格画像.md} [--chapters N]`。输出 JSON 证据报告；Anti-Cheat：所有达标结论必须引用本脚本输出，禁止手写。
+
 ## 维护约定
 
 - 所有新增脚本需经过代码审查，确保符合上述要求。
